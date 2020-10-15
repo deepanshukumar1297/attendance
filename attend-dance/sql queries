@@ -1,0 +1,85 @@
+/*
+	recommended to override equals and tostring method accordingly
+	linked list is good for updation insertion or deletion
+	array list is good for fetching or retrieval
+
+*/
+
+
+
+#	all the database related files are in dao package
+#	port number = 3306
+#	username ="root"
+#	password=deep123
+
+
+create database attendance;
+use attendance;
+create table student(name varchar (30) NOT NULL ,id varchar (10) ,primary key (id));
+create table teacher(name varchar (30) NOT NULL ,id varchar (10)  ,primary key (id));
+create table section(name varchar (15) NOT NULL ,id varchar (10)  ,primary key (id));
+create table coordinator(name varchar (30) NOT NULL ,id varchar (10) ,primary key (id));
+
+
+CREATE TABLE coordiantor_section (
+    password varchar(20) NOT NULL,
+    section varchar(10) NOT NULL REFERENCES section(name),
+    coordinator varchar(30) NOT NULL REFERENCES teacher(name),
+    section_id varchar(10) REFERENCES section(id),
+    teacher_id varchar(10) NOT NULL REFERENCES teacher(id),
+    PRIMARY KEY (section_id),
+    FOREIGN KEY (section_id) REFERENCES section(id),
+    FOREIGN KEY (teacher_id) REFERENCES teacher(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#	show processlist;
+#	kill processid;    here processid is dynamic
+/*
+	CREATE USER 'yourUserName'@'%' IDENTIFIED BY 'yourPassword';
+	GRANT ALL PRIVILEGES ON databasename.tablename TO 'user'@'host' IDENTIFIED BY 'safe_password' WITH GRANT OPTION;    
+	FLUSH PRIVILEGES;
+	
+	(host for all ip addresses =%)
+	(for all databses= *.*)
+	(for particular database= databasename.*)
+	(for particular database with particualr table = databasename.tablename)
+	
+*/
+#	select user,host from MySQL.user;   (to see existing users)
+#	DROP USER 'user'@'host';            (to drop users)   (ex-DROP USER 'Jack'@'localhost'; DROP USER 'deep'@'%';)
+
+
+
+
+/*
+	to_change_user_name
+	
+	select user from MySQL.user;
+	update mysql.user set user = 'myRoot' where user = 'root';
+	
+	to_know_the_hostname or port
+	
+	show variables where variable_name='hostname';
+	show variables where variable_name='port';
+
+*/
