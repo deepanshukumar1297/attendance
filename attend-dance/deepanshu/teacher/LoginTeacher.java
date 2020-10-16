@@ -31,17 +31,17 @@ public class LoginTeacher extends HttpServlet {
 		PrintWriter out= response.getWriter();
 		DTeacher dteacher = new DTeacher();
 		
-		String name = request.getParameter("name");
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+		String teacher_name = request.getParameter("teacher_name");
+		String teacher_id = request.getParameter("teacher_id");
+		String teacher_password = request.getParameter("teacher_password");
 		
 		HttpSession session=request.getSession();  
-        session.setAttribute("teacher_name",name);									 //session to pass the password so the that first time user can change it
-        session.setAttribute("teacher_id",id);											 //session for section
+        session.setAttribute("teacher_name",teacher_name);									 //session to pass the password so the that first time user can change it
+        session.setAttribute("teacher_id",teacher_id);											 //session for section
         
-        int countlogin=dteacher.countLogin(id);
+        int countlogin=dteacher.countLogin(teacher_id);
         
-		if(password.equalsIgnoreCase("password") && countlogin==1)                           //first time user
+		if(teacher_password.equalsIgnoreCase("password") && countlogin==1)                           //first time user
 		{
 			RequestDispatcher rd=request.getRequestDispatcher("chngPassTeacher.html");
 			rd.forward(request, response);

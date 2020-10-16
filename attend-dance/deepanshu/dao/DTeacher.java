@@ -17,7 +17,7 @@ public class DTeacher
 {
 	String url="jdbc:mysql://localhost:3306/attendance";
 	String uname="root";
-	String pass="deep123";
+	String pass="root";
 	
 	public void getCon()  
 	{

@@ -21,26 +21,12 @@
             <form action="LoginTeacher" method="post">
 	            <div>
 	            	TEACHER ID
-	            	<select name="id">
+	            	<select name="teacher_id">
 		            	<% 
 							for(Teacher t:teacherslist)
 							{
 						%>
-	            		<option><%=t.getId() %></option>
-	            		<%
-							}
-						%>
-	            	</select>
-	            </div>
-	            <br><br>
-	            <div>
-	            	TEACHER NAME
-	            	<select name="name">
-		            	<% 
-							for(Teacher t:teacherslist)
-							{
-						%>
-	            		<option><%=t.getName() %></option>
+	            		<option><%=t.getTeacher_id() %></option>
 	            		<%
 							}
 						%>
@@ -49,7 +35,7 @@
 	            <br><br>
 	            <div>
 	            	Password
-           			<input type="password" name="password" placeholder="Enter Password">
+           			<input type="password" name="teacher_password" placeholder="Enter Password">
 	            </div>
 	            <br>
 	            <input type="submit" value="Login">    
@@ -68,8 +54,8 @@
 					{
 				%>
 			<tr>
-				<td><%= s.getName() %></td>
-				<td><%= s.getId() %></td>
+				<td><%= s.getTeacher_name() %></td>
+				<td><%= s.getTeacher_id() %></td>
 			</tr>
 				<%
 					}
