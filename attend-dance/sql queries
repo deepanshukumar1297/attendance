@@ -15,22 +15,95 @@
 
 create database attendance;
 use attendance;
-create table student(name varchar (30) NOT NULL ,id varchar (10) ,primary key (id));
-create table teacher(name varchar (30) NOT NULL ,id varchar (10)  ,primary key (id));
-create table section(name varchar (15) NOT NULL ,id varchar (10)  ,primary key (id));
-create table coordinator(name varchar (30) NOT NULL ,id varchar (10) ,primary key (id));
-
-
-CREATE TABLE coordiantor_section (
-    password varchar(20) NOT NULL,
-    section varchar(10) NOT NULL REFERENCES section(name),
-    coordinator varchar(30) NOT NULL REFERENCES teacher(name),
-    section_id varchar(10) REFERENCES section(id),
-    teacher_id varchar(10) NOT NULL REFERENCES teacher(id),
-    PRIMARY KEY (section_id),
-    FOREIGN KEY (section_id) REFERENCES section(id),
-    FOREIGN KEY (teacher_id) REFERENCES teacher(id)
+create table teacher(
+	teacher_name varchar(50) not null ,
+    teacher_id varchar(20) ,
+    teacher_password varchar(30) not null,
+    countlogin int not null,
+    primary key(teacher_id)
 );
+create table section(
+	section_name varchar(50) unique not null ,
+    section_id varchar(20),
+	primary key(section_id)
+);
+create table subject(
+	subject_name varchar(50) unique not null ,
+    subject_id varchar(20),
+    primary key(subject_id)
+);
+create table student(
+	student_name varchar(50) not null ,
+    student_id varchar(20),
+    section_id varchar(20) ,
+    foreign key (section_id) references section(section_id)
+    on delete set null
+    on update cascade,
+	primary key(student_id)
+);
+create table coordinator(
+	teacher_id varchar(20) not null unique,
+    section_id varchar(20) ,
+    foreign key (teacher_id) references teacher(teacher_id)
+    on delete cascade
+    on update cascade,
+    foreign key (section_id) references section(section_id)
+    on delete cascade
+    on update cascade,
+    primary key (section_id) 	
+);
+create table teacher_subject(
+	teacher_id varchar(20) ,
+    subject_id varchar(20) ,
+    foreign key (teacher_id) references teacher(teacher_id)
+    on delete cascade
+    on update cascade,
+    foreign key (subject_id) references subject(subject_id)
+    on delete cascade
+    on update cascade,
+    primary key (teacher_id,subject_id)
+);	
+create table teacher_section(
+	teacher_id varchar(20) ,
+    section_id varchar(20) ,
+    foreign key (teacher_id) references teacher(teacher_id)
+    on delete cascade
+    on update cascade,
+    foreign key (section_id) references section(section_id)
+    on delete cascade
+    on update cascade,
+    primary key (section_id,teacher_id)
+);	
+create table section_subject(
+	subject_id varchar(20) ,
+    section_id varchar(20) ,
+    foreign key (subject_id) references subject(subject_id)
+    on delete cascade
+    on update cascade,
+    foreign key (section_id) references section(section_id)
+    on delete cascade
+    on update cascade,
+    primary key (section_id,subject_id)
+);	
+create table student_subject(
+	student_id varchar(20) ,
+    subject_id varchar(20) ,
+    foreign key (student_id) references student(student_id)
+    on delete cascade
+    on update cascade,
+    foreign key (subject_id) references subject(subject_id)
+    on delete cascade
+    on update cascade,
+    primary key (subject_id,student_id)
+);	
+
+
+
+
+
+
+#ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+
 
 
 
