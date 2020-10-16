@@ -33,11 +33,11 @@ public class AdminCoordinator extends HttpServlet
 
 		response.setContentType("text/html");
 		
-		String teacher=request.getParameter("teacher");
-		String section=request.getParameter("section");
+		String coordinator_teacherId=request.getParameter("coordinator_teacherId");
+		String coordinator_sectionId=request.getParameter("coordinator_sectionId");
 		
-		coordinator.setTeacher(teacher);
-		coordinator.setSection(section);
+		coordinator.setCoordinator_teacherId(coordinator_teacherId);
+		coordinator.setCoordinator_sectionId(coordinator_sectionId);
 
 		String inserted=dcoordinator.insert(coordinator);
 		
@@ -48,7 +48,7 @@ public class AdminCoordinator extends HttpServlet
 		}
 		else if(inserted.equals("duplicate entry"))
 		{
-			out.print("THIS TEACHER IS ALREADY A COORDINATOR");
+			out.print("DUPLICATE ENTRY");
 			rd.include(request, response);
 		}
 		else if(inserted.equals("exception occcured"))

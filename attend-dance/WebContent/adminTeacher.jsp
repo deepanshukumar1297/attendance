@@ -21,11 +21,11 @@
 		add teachers
 		<div>
 			NAME
-			<input type="text" name="teacher" required>
+			<input type="text" name="teacher_name" required>
 		</div>
 		<div>
 			ID
-			<input type="text" name="id" required>
+			<input type="text" name="teacher_id" required>
 		</div>
 		<div>
 			<input type = "submit" value="ADD teacher" >
@@ -35,8 +35,8 @@
 		teachers list
 		<table border="solid">
 			<tr>
-				<th>teachers</th>
-				<th>id</th>
+				<th>teacher name</th>
+				<th>teacher id</th>
 				<th>update</th>
 				<th>delete</th>
 			</tr>
@@ -45,8 +45,8 @@
 					{
 				%>
 			<tr>
-				<td><%= t.getName() %></td>
-				<td><%= t.getId() %></td>
+				<td><%= t.getTeacher_name() %></td>
+				<td><%= t.getTeacher_id() %></td>
 				<th><button>update</button></th>
 				<th><button>delete</button></th>
 			</tr>

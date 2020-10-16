@@ -2,23 +2,19 @@ package pojo;
 
 public class Section
 {
-	private String name;
-	private String id;
-	
-	@Override
-	public String toString() {
-		return "" + name + "  " + id + "";
+	private String section_name;
+	private String section_id;
+	public String getSection_name() {
+		return section_name;
 	}
-	public String getName() {
-		return name;
+	public void setSection_name(String section_name) {
+		this.section_name = section_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public String getSection_id() {
+		return section_id;
 	}
-	public String getId() {
-		return id;
+	public void setSection_id(String section_id) {
+		this.section_id = section_id;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
 }

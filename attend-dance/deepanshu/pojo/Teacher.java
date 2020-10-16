@@ -2,34 +2,36 @@ package pojo;
 
 public class Teacher
 {
-	private String name;
-	private String id;
-	private String password;
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@Override
-	public String toString() {
-		return "" + name + "  " + id + "";
-	}
+	private String teacher_name;
+	private String teacher_id;
+	private String teacher_password;
+	private int countlogin;
 	
-	public String getName() {
-		return name;
+	public int getCountlogin() {
+		return countlogin;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCountlogin(int countlogin) {
+		this.countlogin = countlogin;
 	}
-	public String getId() {
-		return id;
+	public String getTeacher_name() {
+		return teacher_name;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setTeacher_name(String teacher_name) {
+		this.teacher_name = teacher_name;
 	}
+	public String getTeacher_id() {
+		return teacher_id;
+	}
+	public void setTeacher_id(String teacher_id) {
+		this.teacher_id = teacher_id;
+	}
+	public String getTeacher_password() {
+		return teacher_password;
+	}
+	public void setTeacher_password(String teacher_password) {
+		this.teacher_password = teacher_password;
+	}
+
+
 	
 }

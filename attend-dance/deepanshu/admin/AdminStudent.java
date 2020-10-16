@@ -34,16 +34,16 @@ public class AdminStudent extends HttpServlet {
 		
 		response.setContentType("text/html");
 
-		String name=request.getParameter("student");
-		String id=request.getParameter("id");
-		String section=request.getParameter("section");
+		String student_name=request.getParameter("student_name");
+		String student_id=request.getParameter("student_id");
+		String student_sectionId=request.getParameter("student_sectionId");
 
 
-		student.setName(name);
-		student.setId(id);
-		student.setSection(section);
+		student.setStudent_name(student_name);
+		student.setStudent_id(student_id);
+		student.setStudent_sectionId(student_sectionId);
 		
-		if(name.equals("") || id.equals(""))
+		if(student_name.equals("") || student_id.equals(""))
 		{
 			out.print("DON'T LEAVE THE FIELD EMPTY");
 			rd.include(request, response);

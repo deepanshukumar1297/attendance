@@ -3,27 +3,21 @@ package pojo;
 public class Coordinator
 {
 	
-	private String teacher;
-	private String section;
+	private String coordinator_teacherId;
+	private String coordinator_sectionId;
 	
-	
-	public String getTeacher() {
-		return teacher;
+	public String getCoordinator_teacherId() {
+		return coordinator_teacherId;
 	}
-	public void setTeacher(String teacher) {
-		this.teacher = teacher;
+	public void setCoordinator_teacherId(String coordinator_teacherId) {
+		this.coordinator_teacherId = coordinator_teacherId;
 	}
-	public String getSection() {
-		return section;
+	public String getCoordinator_sectionId() {
+		return coordinator_sectionId;
 	}
-	public void setSection(String section) {
-		this.section = section;
+	public void setCoordinator_sectionId(String coordinator_sectionId) {
+		this.coordinator_sectionId = coordinator_sectionId;
 	}
-
-//	@Override
-//	public String toString() {
-//		return "Teacher [name=" + name + ", id=" + id + "]";
-//	}
 	
 
 	

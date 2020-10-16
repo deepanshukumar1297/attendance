@@ -33,30 +33,29 @@ public class AdminSection extends HttpServlet {
 
 		response.setContentType("text/html");
 		
-		String name=request.getParameter("section");
-		String id=request.getParameter("id");
+		String section_name=request.getParameter("section_name");
+		String section_id=request.getParameter("section_id");
 		
-		section.setName(name);
-		section.setId(id);
+		section.setSection_name(section_name);
+		section.setSection_id(section_id);
 		
-		if(name.equals("") || id.equals(""))
+		if(section_name.equals("") || section_id.equals(""))
 		{
 			out.print("DON'T LEAVE THE FIELD EMPTY");
 			rd.include(request, response);
 		}
-		
 		else
-		{
+		{			
 			String inserted=dsection.insert(section);
-			
-			if(inserted.equals("ADDED"))
+
+			if(inserted.equals("added"))
 			{
-				out.print("SECTION ADDED");
+				out.print("SECTION IS ADDED");
 				rd.include(request, response);
 			}
 			else if(inserted.equals("duplicate entry"))
 			{
-				out.print("THIS SECTION ID ALREADY EXISTS");
+				out.print("THIS SECTION ALREADY EXISTS");
 				rd.include(request, response);
 			}
 			else if(inserted.equals("exception occcured"))
@@ -65,6 +64,6 @@ public class AdminSection extends HttpServlet {
 				rd.include(request, response);
 			}
 		}
-	}
 
+	}
 }

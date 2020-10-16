@@ -31,13 +31,13 @@ public class DSection
 	public String insert(Section section) 
 	{
 		getCon();
-		String query= "insert into section values(?,?)";	//name id
+		String query= "insert into section values(?,?)";	//section_name , section_id
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			PreparedStatement pst= con.prepareStatement(query);
-			pst.setString(1, section.getName());
-			pst.setString(2, section.getId());
+			pst.setString(1, section.getSection_name());
+			pst.setString(2, section.getSection_id());
 			pst.executeUpdate();
 			return "added";
 		}
@@ -59,7 +59,7 @@ public class DSection
 	{
 		ArrayList<Section> sectionslist= new ArrayList<Section>();
 		getCon();
-		String query= "select id,name from section";
+		String query= "select section_id, section_name from section";
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
@@ -68,10 +68,10 @@ public class DSection
 			while(rs.next())
 			{
 				Section section = new Section();
-				String id = rs.getString("id");			//foreign key for student as section
-				String name=rs.getString("name");
-				section.setId(id);                      
-				section.setName(name);
+				String section_id = rs.getString("section_id");			//foreign key for student as section
+				String section_name=rs.getString("section_name");
+				section.setSection_id(section_id);                      
+				section.setSection_name(section_name);
 				sectionslist.add(section);
 			}
 		}

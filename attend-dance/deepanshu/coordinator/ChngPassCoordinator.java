@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.DCoordinator;
 import dao.DTeacher;
 
 /**
@@ -36,15 +37,15 @@ public class ChngPassCoordinator extends HttpServlet {
 		String new_pass2 = request.getParameter("new_pass2");
 		
 		HttpSession session=request.getSession(false);  
-        String same_curr_pass =(String) session.getAttribute("same_curr_pass");
-        String section_id =(String) session.getAttribute("section");
+        String coordiantor_teacherPassword =(String) session.getAttribute("coordiantor_teacherPassword");
+        String coordiantor_sectionId =(String) session.getAttribute("coordiantor_sectionId");
 
-        if(same_curr_pass.equals(curr_pass))
+        if(coordiantor_teacherPassword.equals(curr_pass))
         {
         	if(new_pass.equals(new_pass2))
         	{
-        		DTeacher dteacher = new DTeacher();
-        		String status=dteacher.updatePassword(new_pass,section_id);
+        		DCoordinator dcoordinator = new DCoordinator();
+        		String status=dcoordinator.updatePassword(new_pass,coordiantor_sectionId);
         		
         		if(status.equals("password changed"))
         		{
@@ -55,7 +56,7 @@ public class ChngPassCoordinator extends HttpServlet {
         		{
         			out.print("SOMETHING WRONG IN SQL");
         			RequestDispatcher rd = request.getRequestDispatcher("chngPassCoordinator.html");
-            		rd.forward(request, response);
+            		rd.include(request, response);
         		}
         	}
         	else

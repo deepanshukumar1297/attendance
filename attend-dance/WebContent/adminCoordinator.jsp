@@ -32,16 +32,17 @@
 					ArrayList<Section> sectionslist= dsection.fetch();
 				%>
 	<h2>welcome admin u can now update insert and delete coordiantors and their assigned sections</h2>
+	
 	<form action="AdminCoordinator">
 		make coordiantor
 		<div>
 			teacher
-			<select name="teacher">
+			<select name="coordinator_teacherId">
 				<% 
 					for(Teacher t:teacherslist)
 					{
 				%>
-				<option><%= t.getId() %></option>
+				<option><%= t.getTeacher_id() %></option>
 				<%
 					}
 				%>
@@ -51,12 +52,12 @@
 				
 		<div>
 			section
-			<select name="section">
+			<select name="coordinator_sectionId">
 				<% 
 					for(Section t:sectionslist)
 					{
 				%>
-					<option><%= t.getId() %></option>				
+					<option><%= t.getSection_id() %></option>				
 				<%
 					}
 				%>
@@ -82,8 +83,8 @@
 					{
 				%>
 			<tr>
-				<td><%= t.getName() %></td>
-				<td><%= t.getId() %></td>
+				<td><%= t.getTeacher_name() %></td>
+				<td><%= t.getTeacher_id() %></td>
 			</tr>
 				<%
 					}
@@ -101,8 +102,8 @@
 					{
 				%>
 			<tr>
-				<td><%= s.getName() %></td>
-				<td><%= s.getId() %></td>
+				<td><%= s.getSection_name() %></td>
+				<td><%= s.getSection_id() %></td>
 			</tr>
 				<%
 					}
@@ -114,8 +115,8 @@
 		coordinator list
 		<table border="solid">
 			<tr>
-				<th>teachers</th>
-				<th>section</th>
+				<th>teacher id</th>
+				<th>section id</th>
 				<th>update</th>
 				<th>delete</th>
 			</tr>
@@ -124,8 +125,8 @@
 					{
 				%>
 			<tr>
-				<td><%= c.getTeacher() %></td>
-				<td><%= c.getSection() %></td>
+				<td><%= c.getCoordinator_teacherId() %></td>
+				<td><%= c.getCoordinator_sectionId() %></td>
 				<th><button>update</button></th>
 				<th><button>delete</button></th>
 			</tr>

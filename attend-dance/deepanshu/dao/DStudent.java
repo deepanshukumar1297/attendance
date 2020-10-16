@@ -28,17 +28,22 @@ public class DStudent
 
 	}
 	
+	/**
+	 * 
+	 * @param student
+	 * @return status of insertion of students and pass it to adminStudent.jsp
+	 */
 	public String insert(Student student) 
 	{
 		getCon();
-		String query= "insert into student values(?,?,?)";    //name , id, section
+		String query= "insert into student values(?,?,?)";    //student_name , student_id, student_section
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			PreparedStatement pst= con.prepareStatement(query);
-			pst.setString(1, student.getName());
-			pst.setString(2, student.getId());
-			pst.setString(3, student.getSection());
+			pst.setString(1, student.getStudent_name());
+			pst.setString(2, student.getStudent_id());
+			pst.setString(3, student.getStudent_sectionId());
 			pst.executeUpdate();
 			return "added";
 		}
@@ -54,12 +59,15 @@ public class DStudent
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @return list of student as arrayList
+	 */
 	public ArrayList<Student> fetch() 
 	{
 		ArrayList<Student> studentslist= new ArrayList<Student>();
 		getCon();
-		String query= "select id ,name ,section from student ORDER BY name,id";
+		String query= "select student_id ,student_name ,section_id from student ORDER BY student_name, student_id";
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
@@ -68,12 +76,12 @@ public class DStudent
 			while(rs.next())
 			{
 				Student student = new Student();
-				String id = rs.getString("id");
-				String name=rs.getString("name");
-				String section=rs.getString("section");
-				student.setId(id);
-				student.setName(name);
-				student.setSection(section);
+				String student_id = rs.getString("student_id");
+				String student_name=rs.getString("student_name");
+				String student_sectionId=rs.getString("section_id");			//foreign key
+				student.setStudent_id(student_id);
+				student.setStudent_name(student_name);
+				student.setStudent_sectionId(student_sectionId);
 				studentslist.add(student);
 			}
 		}

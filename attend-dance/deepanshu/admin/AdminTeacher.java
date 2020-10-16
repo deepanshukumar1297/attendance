@@ -31,15 +31,17 @@ public class AdminTeacher extends HttpServlet {
 		
 		response.setContentType("text/html");
 		
-		String name=request.getParameter("teacher");
-		String id=request.getParameter("id");
-		String password = "password";
+		String teacher_name=request.getParameter("teacher_name");
+		String teacher_id=request.getParameter("teacher_id");
+		String teacher_password = "password";
+		int countlogin=0;
 		
-		teacher.setName(name);
-		teacher.setId(id);
-		teacher.setPassword(password);
+		teacher.setTeacher_name(teacher_name);
+		teacher.setTeacher_id(teacher_id);
+		teacher.setTeacher_password(teacher_password);
+		teacher.setCountlogin(countlogin);
 		
-		if(name.equals("") || id.equals(""))
+		if(teacher_name.equals("") || teacher_id.equals(""))
 		{
 			out.print("DON'T LEAVE THE FIELD EMPTY");
 			rd.include(request, response);

@@ -21,11 +21,11 @@
 		<h3>add section</h3>
 		<div>
 		section name
-			<input type="text" name="section" required>
+			<input type="text" name="section_name" required>
 		</div>
 		<div>
 		section id
-			<input type="text" name="id" required>
+			<input type="text" name="section_id" required>
 		</div>
 		<div>
 			<input type = "submit" value="ADD section">
@@ -49,8 +49,8 @@
 					{
 				%>
 			<tr>
-				<td><%= s.getName() %></td>
-				<td><%= s.getId() %></td>
+				<td><%= s.getSection_name() %></td>
+				<td><%= s.getSection_id() %></td>
 				<th><button>update</button></th>
 				<th><button>delete</button></th>
 			</tr>

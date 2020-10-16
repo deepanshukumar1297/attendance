@@ -33,19 +33,22 @@ public class DTeacher
 	/**
 	 * 
 	 * @param teacher
-	 * @return
+	 * @return status of insertion of data in database to adminTeacher.jsp
 	 */
 	public String insert(Teacher teacher)
 	{
 		getCon();
-		String query= "insert into teacher values(?,?,?)";     //name, id, password
+		String query= "insert into teacher values(?,?,?,?)";     //teacher_name, teacher_id, teacher_password , countlogin
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			PreparedStatement pst= con.prepareStatement(query);
-			pst.setString(1, teacher.getName());
-			pst.setString(2, teacher.getId());			//foreign key for coordinator
-			pst.setString(3, teacher.getPassword());
+			
+			pst.setString(1, teacher.getTeacher_name());
+			pst.setString(2, teacher.getTeacher_id());			//foreign key for coordinator
+			pst.setString(3, teacher.getTeacher_password());
+			pst.setInt(4, teacher.getCountlogin());
+			
 			pst.executeUpdate();
 			return "added";
 		}
@@ -64,13 +67,13 @@ public class DTeacher
 
 	/**
 	 * 
-	 * @return list of teachers as Arraylist
+	 * @return list of teachers as ArrayList
 	 */
 	public ArrayList<Teacher> fetch() 
 	{
 		ArrayList<Teacher> teacherslist= new ArrayList<Teacher>();
 		getCon();
-		String query= "select id,name from teacher";
+		String query= "select teacher_id,teacher_name from teacher";
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
@@ -79,10 +82,10 @@ public class DTeacher
 			while(rs.next())
 			{
 				Teacher teacher = new Teacher();
-				String id = rs.getString("id");
-				String name=rs.getString("name");
-				teacher.setId(id);
-				teacher.setName(name);
+				String teacher_id = rs.getString("teacher_id");
+				String teacher_name=rs.getString("teacher_name");
+				teacher.setTeacher_id(teacher_id);
+				teacher.setTeacher_name(teacher_name);
 				teacherslist.add(teacher);
 			}
 		}
@@ -91,26 +94,6 @@ public class DTeacher
 			e.printStackTrace();
 		}
 		return teacherslist;
-	}
-
-	
-	
-	public String updatePassword(String password,String section_id)
-	{
-		getCon();
-		String query= "update teacher set password= \""+password+"\" where id=\""+section_id+"\"";     
-		try
-		{
-			Connection con=DriverManager.getConnection(url, uname, pass);
-			PreparedStatement pst= con.prepareStatement(query);		
-			pst.executeUpdate();
-			return "password changed";
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-			return "exception occcured";
-		}	
 	}
 
 	public int countLogin(String teacherid)
@@ -140,10 +123,6 @@ public class DTeacher
 		}
 	}
 
-	public String passValidation(String password, String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 
 

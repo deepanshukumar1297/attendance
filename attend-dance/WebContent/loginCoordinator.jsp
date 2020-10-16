@@ -15,16 +15,16 @@
 					DSection dsection = new DSection();
 					ArrayList<Section> sectionslist= dsection.fetch();
 				%>
-        <h1>ADMIN LOGIN</h1>
+        <h1>COORDINATOR LOGIN</h1>
             <form action="LoginCoordinator" method="post">
 	            <div>
 	            	choose section
-	            	<select name="section">
+	            	<select name="coordiantor_sectionId">
 		            	<% 
 							for(Section s:sectionslist)
 							{
 						%>
-	            		<option><%=s.getId() %></option>
+	            		<option><%=s.getSection_id() %></option>
 	            		<%
 							}
 						%>
@@ -33,7 +33,7 @@
 	            <br><br>
 	            <div>
 	            	Password
-           			<input type="password" name="password" placeholder="Enter Password">
+           			<input type="password" name="coordiantor_teacherPassword" placeholder="Enter Password">
 	            </div>
 	            <br>
 	            <input type="submit" value="Login">    
@@ -44,16 +44,16 @@
         	section list
 		<table border="solid">
 			<tr>
-				<th>teachers</th>
-				<th>id</th>
+				<th>section name</th>
+				<th> section id</th>
 			</tr>
 				<% 
 					for(Section s:sectionslist)
 					{
 				%>
 			<tr>
-				<td><%= s.getName() %></td>
-				<td><%= s.getId() %></td>
+				<td><%= s.getSection_name() %></td>
+				<td><%= s.getSection_id() %></td>
 			</tr>
 				<%
 					}

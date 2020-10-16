@@ -29,23 +29,23 @@ public class LoginCoordinator extends HttpServlet {
 		PrintWriter out= response.getWriter();
 		DCoordinator dcoordinator = new DCoordinator();
 		
-		String section = request.getParameter("section");									//section id
-		String password = request.getParameter("password");
+		String coordiantor_sectionId = request.getParameter("coordiantor_sectionId");									//section id
+		String coordiantor_teacherPassword = request.getParameter("coordiantor_teacherPassword");
 		
 		HttpSession session=request.getSession();  
-        session.setAttribute("same_curr_pass",password);									 //session to pass the password so the that first time user can change it
-        session.setAttribute("section",section);											 //session for section
+        session.setAttribute("coordiantor_teacherPassword",coordiantor_teacherPassword);									 //session to pass the password so the that first time user can change it
+        session.setAttribute("coordiantor_sectionId",coordiantor_sectionId);											 //session for section
         
-        int countlogin=dcoordinator.countLogin(section);
+        int countlogin=dcoordinator.countLogin(coordiantor_sectionId);
         
-		if(password.equalsIgnoreCase("password") && countlogin==1)                           //first time user
+		if(coordiantor_teacherPassword.equalsIgnoreCase("password") && countlogin==1)                           //first time user
 		{
 			RequestDispatcher rd=request.getRequestDispatcher("chngPassCoordinator.html");
 			rd.forward(request, response);
 		}
-		else									                                             //regular user
+		else									                                                                //regular user
 		{
-			String validation=dcoordinator.passValidation(password,section);
+			String validation=dcoordinator.passValidation(coordiantor_teacherPassword,coordiantor_sectionId);
 			if(validation.equals("correct password"))
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("coordinator.jsp");

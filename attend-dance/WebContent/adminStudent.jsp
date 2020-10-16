@@ -19,31 +19,32 @@
 					Section section = new Section();
 					
 					DStudent dstudent = new DStudent();
-					DSection dsection = new DSection();      //for getting section id
+					DSection dsection = new DSection();      //for getting section_id since it is foreign key
 					
 					ArrayList<Student> studentslist= dstudent.fetch();
 					ArrayList<Section> sectionslist= dsection.fetch();
 				%>
 				
 	<h2>welcome admin u can now update insert and delete students and their corrosponding sections</h2>
+	
 	<form action="AdminStudent">
 		add sections
 		<div>
 			NAME
-			<input type="text" name="student" required>
+			<input type="text" name="student_name" required>
 		</div>
 		<div>
 			ID
-			<input type="text" name="id" required>
+			<input type="text" name="student_id" required>
 		</div>
 		<div>
 			section
-			<select name="section">
+			<select name="student_sectionId">
 				<% 
 					for(Section t:sectionslist)
 					{
 				%>
-				<option><%= t.getId() %> </option>
+				<option><%= t.getSection_id() %> </option>
 				<%
 					}
 				%>
@@ -61,9 +62,9 @@
 		Student list
 		<table border="solid">
 			<tr>
-				<th>teachers</th>
-				<th>id</th>
-				<th>section</th>
+				<th>student name</th>
+				<th>student id</th>
+				<th>student's section</th>
 				<th>update</th>
 				<th>delete</th>
 			</tr>
@@ -72,9 +73,9 @@
 					{
 				%>
 			<tr>
-				<td><%= t.getName() %></td>
-				<td><%= t.getId() %></td>
-				<td><%= t.getSection() %></td>
+				<td><%= t.getStudent_name() %></td>
+				<td><%= t.getStudent_id() %></td>
+				<td><%= t.getStudent_sectionId() %></td>
 				<td>
 					<a href="adminStudentUpdate.jsp"><button>UPDATE</button></a>
 				</td>
