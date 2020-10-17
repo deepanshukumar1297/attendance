@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="pojo.Student" %>
-<%@page import="dao.DStudent"%>
+<%@ page import="dao.DStudent"%>
 <%@ page import="pojo.Section" %>
-<%@page import="dao.DSection"%>
+<%@ page import="dao.DSection"%>
 
 
 <!DOCTYPE html>

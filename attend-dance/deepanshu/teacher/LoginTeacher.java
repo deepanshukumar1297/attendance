@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.DCoordinator;
 import dao.DTeacher;
 
 /**
@@ -31,24 +30,24 @@ public class LoginTeacher extends HttpServlet {
 		PrintWriter out= response.getWriter();
 		DTeacher dteacher = new DTeacher();
 		
-		String teacher_name = request.getParameter("teacher_name");
 		String teacher_id = request.getParameter("teacher_id");
-		String teacher_password = request.getParameter("teacher_password");
+		String teacher_password = request.getParameter("teacher_password");	
 		
-		HttpSession session=request.getSession();  
-        session.setAttribute("teacher_name",teacher_name);									 //session to pass the password so the that first time user can change it
-        session.setAttribute("teacher_id",teacher_id);											 //session for section
+		HttpSession session = request.getSession();
+		session.setAttribute("teacher_password", teacher_password);
+		session.setAttribute("teacher_id", teacher_id);
+
         
         int countlogin=dteacher.countLogin(teacher_id);
         
-		if(teacher_password.equalsIgnoreCase("password") && countlogin==1)                           //first time user
+		if(teacher_password.equalsIgnoreCase("password") && countlogin==1)                   //first time user
 		{
 			RequestDispatcher rd=request.getRequestDispatcher("chngPassTeacher.html");
 			rd.forward(request, response);
 		}
 		else									                                             //regular user
 		{
-			String validation=dteacher.passValidation(password,id);
+			String validation=dteacher.passValidation(teacher_password,teacher_id);
 			if(validation.equals("correct password"))
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("teacher.jsp");

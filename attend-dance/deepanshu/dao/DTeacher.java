@@ -45,7 +45,7 @@ public class DTeacher
 			PreparedStatement pst= con.prepareStatement(query);
 			
 			pst.setString(1, teacher.getTeacher_name());
-			pst.setString(2, teacher.getTeacher_id());			//foreign key for coordinator
+			pst.setString(2, teacher.getTeacher_id());			 //foreign key for coordinator
 			pst.setString(3, teacher.getTeacher_password());
 			pst.setInt(4, teacher.getCountlogin());
 			
@@ -96,7 +96,13 @@ public class DTeacher
 		return teacherslist;
 	}
 
-	public int countLogin(String teacherid)
+	/**
+	 * if countlogin = 1 -> coordinator is first time user and he should change password
+	 * 
+	 * @param teacher_id
+	 * @return -1 or number of times coordinator has logged in
+	 */
+	public int countLogin(String teacher_id)
 	{
 		getCon();		
 		try
@@ -104,13 +110,13 @@ public class DTeacher
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			Statement st= con.createStatement();
 			
-			String query1= "select countlogin from teacher where id= "+teacherid;     
+			String query1= String.format("select countlogin from teacher where teacher_id=('%s')",teacher_id ) ;    
 			ResultSet rs=st.executeQuery(query1);
 			rs.next();
 			int countlogin=rs.getInt("countlogin");
 			countlogin++;
 			
-			String query2="update teacher set countlogin="+countlogin+" where id =\""+teacherid+"\" ";
+			String query2=String.format("update teacher set countlogin=(%d) where teacher_id=('%s')",countlogin,teacher_id);
 			PreparedStatement pst=con.prepareStatement(query2);
 			pst.executeUpdate();
 			return countlogin;
@@ -120,6 +126,57 @@ public class DTeacher
 		{
 			e.printStackTrace();
 			return -1;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param teacher_password
+	 * @param teacher_id
+	 * @return status of correct password entered
+	 */
+	public String passValidation(String teacher_password, String teacher_id)
+	{
+		getCon();		
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			Statement st= con.createStatement();
+			
+			String query1= String.format("select teacher_password from teacher where teacher_id=('%s')",teacher_id ) ;    
+			ResultSet rs=st.executeQuery(query1);
+			rs.next();
+			String password= rs.getString("teacher_password");
+			
+			if(password.equals(teacher_password)) return "correct password";
+			else return "incorrect password";
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return "exception occcured";
+		}
+	}
+
+	public String updatePassword(String teacher_password, String teacher_id)
+	{
+		getCon();		
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			Statement st= con.createStatement();
+			
+			String query1= String.format("update teacher set teacher_password=('%s') where teacher_id=('%s')", teacher_password, teacher_id) ;    
+			st.executeUpdate(query1);
+			
+			return "password changed";
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return "exception occcured";
 		}
 	}
 

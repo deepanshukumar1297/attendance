@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DCoordinator;
-import dao.DTeacher;
 
 /**
  * Servlet implementation class ChngPassCoordinator
