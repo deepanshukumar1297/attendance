@@ -7,7 +7,7 @@
 <title>admin</title>
 </head>
 <body>
-	welcome admin
+	welcome ADMIN
 
 <!--  	
 
