@@ -11,7 +11,6 @@
 </head>
 <body>
 				<%
-					Teacher teacher = new Teacher();
 					DTeacher dteacher = new DTeacher();
 					ArrayList<Teacher> teacherslist= dteacher.fetch();
 				%>

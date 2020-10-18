@@ -11,7 +11,6 @@
 </head>
 <body>
 				<%
-					Subject teacher = new Subject();
 					DSubject dsubject = new DSubject();
 					ArrayList<Subject> subjectslist= dsubject.fetch();
 				%>
@@ -30,7 +29,7 @@
 		<div>
 			<input type = "submit" value="ADD subject" >
 		</div>
-		<br>
+	</form>
 		<br><br><br>
 		subjects list
 		<table border="solid">
@@ -54,6 +53,6 @@
 					}
 				%>
 		</table>
-	</form>
+	
 </body>
 </html>

@@ -15,9 +15,6 @@
 <body>
 
 				<%
-					Student student = new Student();
-					Section section = new Section();
-					
 					DStudent dstudent = new DStudent();
 					DSection dsection = new DSection();      //for getting section_id since it is foreign key
 					

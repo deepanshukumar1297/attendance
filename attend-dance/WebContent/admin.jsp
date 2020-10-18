@@ -19,6 +19,7 @@
 	<a href="adminStudent.jsp"><button>student</button></a>
 	<a href="adminCoordinator.jsp"><button>coordinator</button></a>
 	<a href="adminSection.jsp"><button>section</button></a>
+	<a href="adminSubject.jsp"><button>subject</button></a>
 		
 </body>
 </html>

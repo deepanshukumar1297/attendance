@@ -48,7 +48,6 @@ public class LoginCoordinator extends HttpServlet {
 			String validation=dcoordinator.passValidation(coordiantor_teacherPassword,coordiantor_sectionId);
 			if(validation.equals("correct password"))
 			{
-				request.setAttribute("coordiantor_sectionId", coordiantor_sectionId);
 				RequestDispatcher rd = request.getRequestDispatcher("coordinator.jsp");
 			 	rd.forward(request, response);
 			}

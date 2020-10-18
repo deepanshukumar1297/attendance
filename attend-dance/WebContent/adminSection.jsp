@@ -12,7 +12,6 @@
 </head>
 <body>
 				<%
-					Section section = new Section();
 					DSection dteacher = new DSection();
 					ArrayList<Section> sectionslist= dteacher.fetch();
 				%>

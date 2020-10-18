@@ -19,15 +19,12 @@
 </head>
 <body>
 				<%
-					Teacher teacher = new Teacher();
 					DTeacher dteacher = new DTeacher();
 					ArrayList<Teacher> teacherslist= dteacher.fetch();
 					
-					Coordinator coordinator = new Coordinator();
 					DCoordinator dcoordiantor = new DCoordinator();
 					ArrayList<Coordinator> coordinatorslist= dcoordiantor.fetch();
 					
-					Section section = new Section();
 					DSection dsection = new DSection();
 					ArrayList<Section> sectionslist= dsection.fetch();
 				%>
@@ -67,7 +64,7 @@
 		<div>
 			<input type = "submit" value="make coordiantor" >
 		</div>
-		
+	</form>
 		<!-- display list of coordinators with their sections and section id-->
 		
 		
@@ -135,6 +132,5 @@
 				%>
 		</table>
 		<br>
-	</form>
 </body>
 </html>
