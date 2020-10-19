@@ -124,8 +124,8 @@
 			<tr>
 				<td><%= c.getCoordinator_teacherId() %></td>
 				<td><%= c.getCoordinator_sectionId() %></td>
-				<th><button>update</button></th>
-				<th><button>delete</button></th>
+				<td><button>update</button></td>
+				<td><button>delete</button></td>
 			</tr>
 				<%
 					}

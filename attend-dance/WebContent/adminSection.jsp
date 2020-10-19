@@ -50,8 +50,8 @@
 			<tr>
 				<td><%= s.getSection_name() %></td>
 				<td><%= s.getSection_id() %></td>
-				<th><button>update</button></th>
-				<th><button>delete</button></th>
+				<td><button>update</button></td>
+				<td><button>delete</button></td>
 			</tr>
 				<%
 					}

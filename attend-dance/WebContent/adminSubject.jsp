@@ -46,8 +46,8 @@
 			<tr>
 				<td><%= s.getSubject_name() %></td>
 				<td><%= s.getSubject_id() %></td>
-				<th><button>update</button></th>
-				<th><button>delete</button></th>
+				<td><button>update</button></td>
+				<td><button>delete</button></td>
 			</tr>
 				<%
 					}

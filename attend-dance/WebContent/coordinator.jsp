@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import = "dao.DCoordinator" %>
-<%@ page import = "java.util.ArrayList" %>
 
+<%@ page import = "java.util.ArrayList" %>
 <%@ page import="dao.DTeacher"%>
 <%@ page import="dao.DSection"%>
 <%@ page import="dao.DSubject"%>
@@ -10,6 +9,7 @@
 <%@ page import="pojo.Section" %>
 <%@ page import="pojo.Teacher" %>
 <%@ page import="pojo.Subject" %>
+<%@ page import="pojo.Student" %>
 <%@ page import="pojo.SubjectTeacherSection" %>
 
 
@@ -17,17 +17,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>coordinator</title>
 </head>
 <body>
 		<% 
 	        String coordiantor_sectionId=(String)session.getAttribute("coordiantor_sectionId");
-		
-	        DCoordinator dcoordinator = new DCoordinator();
-			ArrayList<String> coordinatorinfo = dcoordinator.coordinatorInfo(coordiantor_sectionId);     //teacher_id,teacher_name
 			
 			DSubjectTeacherSection dsubteachsec = new DSubjectTeacherSection();
-			ArrayList<SubjectTeacherSection> subteachsec_list = dsubteachsec.fetch(coordiantor_sectionId);     
+			ArrayList<String> coordinatorinfo = dsubteachsec.coordinatorInfo(coordiantor_sectionId);     //teacher_id,teacher_name
+			ArrayList<SubjectTeacherSection> subteach_list = dsubteachsec.fetchSubjectTeacher(coordiantor_sectionId);  
+			ArrayList<Student> secstudentlist = dsubteachsec.fetchStudent(coordiantor_sectionId);     
 
 			DTeacher dteacher = new DTeacher();
 			ArrayList<Teacher> teacherslist= dteacher.fetch();
@@ -85,6 +84,7 @@
 	</form>
 	<br><br><br>
 	LIST OF TEACHERS AND THEIR SUBJECTS
+	<br>
 	<table border="solid">
 			<tr>
 				<th>subject id</th>
@@ -93,7 +93,7 @@
 				<th>delete</th>
 			</tr>
 				<% 
-					for(SubjectTeacherSection sts:subteachsec_list)
+					for(SubjectTeacherSection sts:subteach_list)
 					{
 				%>
 			<tr>
@@ -101,6 +101,30 @@
 				<td><%= sts.getTeacher_id() %></td>
 				<th><button>update</button></th>
 				<th><button>delete</button></th>
+				<%
+					}
+				%>
+			</tr>
+		</table>
+		<br><br>
+		LIST OF STUDENTS IN YOUR CLASS
+		<br>
+		<table border="solid">
+			<tr>
+				<th>student id</th>
+				<th>student name</th>
+				<th>update</th>
+				<th>delete</th>
+			</tr>
+				<% 
+					for(Student s:secstudentlist)
+					{
+				%>
+			<tr>
+				<td><%= s.getStudent_id() %></td>
+				<td><%= s.getStudent_name() %></td>
+				<td><button>update</button></td>
+				<td><button>delete</button></td>
 				<%
 					}
 				%>
