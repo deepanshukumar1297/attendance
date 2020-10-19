@@ -195,37 +195,6 @@ public class DCoordinator
 			return "exception occcured";
 		}	
 	}
-	
-	public ArrayList<String> coordinatorInfo(String coordiantor_sectionId)
-	{
-		getCon();
-		ArrayList<String> coordinatorinfo = new ArrayList<String>();    // teacher_id,teacher_name
-		try
-		{
-			Connection con=DriverManager.getConnection(url, uname, pass);
-			Statement st= con.createStatement();
-			ResultSet rs=null;
-			
-			String query1= String.format("select teacher_id from coordinator where section_id=('%s')",coordiantor_sectionId); 	
-			rs= st.executeQuery(query1);
-			rs.next();
-			String teacher_id=rs.getString("teacher_id");
-			
-			coordinatorinfo.add(teacher_id);
-			
-			String query2 = String.format("select teacher_name from teacher where teacher_id=('%s') ", teacher_id);
-			rs= st.executeQuery(query2);
-			rs.next();
-			String teacher_name=rs.getString("teacher_name");
-			
-			coordinatorinfo.add(teacher_name);
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}	
-		return coordinatorinfo;
-	}
 }
 
 

@@ -46,8 +46,8 @@
 			<tr>
 				<td><%= t.getTeacher_name() %></td>
 				<td><%= t.getTeacher_id() %></td>
-				<th><button>update</button></th>
-				<th><button>delete</button></th>
+				<td><button>update</button></td>
+				<td><button>delete</button></td>
 			</tr>
 				<%
 					}

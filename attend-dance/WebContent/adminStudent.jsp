@@ -25,7 +25,7 @@
 	<h2>welcome admin u can now update insert and delete students and their corrosponding sections</h2>
 	
 	<form action="AdminStudent">
-		add sections
+		add students
 		<div>
 			NAME
 			<input type="text" name="student_name" required>
