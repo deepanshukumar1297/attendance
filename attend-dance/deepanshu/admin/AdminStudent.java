@@ -59,7 +59,7 @@ public class AdminStudent extends HttpServlet {
 			}
 			else if(inserted.equals("duplicate entry"))
 			{
-				out.print("THIS STUDENT ID ALREADY EXISTS");
+				out.print("CANT BE ADDED");
 				rd.include(request, response);
 			}
 			else if(inserted.equals("exception occcured"))

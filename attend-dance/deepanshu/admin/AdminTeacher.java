@@ -33,13 +33,11 @@ public class AdminTeacher extends HttpServlet {
 		
 		String teacher_name=request.getParameter("teacher_name");
 		String teacher_id=request.getParameter("teacher_id");
-		String teacher_password = "password";
-		int countlogin=0;
+		String teacher_password = "*";
 		
 		teacher.setTeacher_name(teacher_name);
 		teacher.setTeacher_id(teacher_id);
 		teacher.setTeacher_password(teacher_password);
-		teacher.setCountlogin(countlogin);
 		
 		if(teacher_name.equals("") || teacher_id.equals(""))
 		{

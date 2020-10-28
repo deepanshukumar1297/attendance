@@ -37,16 +37,18 @@ public class ChngPassTeacher extends HttpServlet {
 		String teacher_password=(String) session.getAttribute("teacher_password");
 		String teacher_id=(String) session.getAttribute("teacher_id");
 
-		
-		 if(teacher_password.equals(curr_pass))
+		if(new_pass.length()>=6)			//length of current password must be 6 or more
+        {
+			if(teacher_password.equals(curr_pass))
 	        {
 	        	if(new_pass.equals(new_pass2))
 	        	{
-	        		String status=dteacher.updatePassword(teacher_password,teacher_id);
+	        		String status=dteacher.updatePassword(new_pass,teacher_id);
 	        		
 	        		if(status.equals("password changed"))
 	        		{
-	        			RequestDispatcher rd = request.getRequestDispatcher("teacher.jsp");
+	        			out.print("PASSWORD CHANGED SUCCESSFULLY");
+	        			RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
 	            		rd.forward(request, response);
 	        		}
 	        		else if(status.equals("exception occcured"))
@@ -69,6 +71,13 @@ public class ChngPassTeacher extends HttpServlet {
 	    		RequestDispatcher rd = request.getRequestDispatcher("chngPassTeacher.html");
 	    		rd.include(request, response);
 	        }
+        }
+		else
+        {
+        	out.println("YOUR CURRENT PASSWORD MUST BE EQUAL OR GREATER THAN 6 CHARACTER");
+    		RequestDispatcher rd = request.getRequestDispatcher("chngPassTeacher.html");
+    		rd.include(request, response);
+        }
 	}
 
 }

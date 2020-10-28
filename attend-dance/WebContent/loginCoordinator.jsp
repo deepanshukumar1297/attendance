@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList" %>
+
+<%@ page import="pojo.Coordinator" %>
+<%@page import="dao.DCoordinator"%>
+
 <%@ page import="pojo.Section" %>
 <%@page import="dao.DSection"%>
 
@@ -13,6 +17,9 @@
     			<%
 					DSection dsection = new DSection();
 					ArrayList<Section> sectionslist= dsection.fetch();
+					
+					DCoordinator dcoordiantor = new DCoordinator();
+					ArrayList<Coordinator> coordinatorslist= dcoordiantor.fetch();
 				%>
         <h1>COORDINATOR LOGIN</h1>
             <form action="LoginCoordinator" method="post">
@@ -59,5 +66,29 @@
 				%>
 		</table>
     
+    <br><br>
+		coordinator list
+		<table border="solid">
+			<tr>
+				<th>teacher id</th>
+				<th>section id</th>
+				<th>update</th>
+				<th>delete</th>
+			</tr>
+				<% 
+					for(Coordinator c:coordinatorslist)
+					{
+				%>
+			<tr>
+				<td><%= c.getCoordinator_teacherId() %></td>
+				<td><%= c.getCoordinator_sectionId() %></td>
+				<td><button>update</button></td>
+				<td><button>delete</button></td>
+			</tr>
+				<%
+					}
+				%>
+		</table>
+		<br>
     </body>
 </html>

@@ -38,7 +38,7 @@ public class DTeacher
 	public String insert(Teacher teacher)
 	{
 		getCon();
-		String query= "insert into teacher values(?,?,?,?)";     //teacher_name, teacher_id, teacher_password , countlogin
+		String query= "insert into teacher values(?,?,?)";     //teacher_name, teacher_id, teacher_password 
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
@@ -47,7 +47,6 @@ public class DTeacher
 			pst.setString(1, teacher.getTeacher_name());
 			pst.setString(2, teacher.getTeacher_id());			 //foreign key for coordinator
 			pst.setString(3, teacher.getTeacher_password());
-			pst.setInt(4, teacher.getCountlogin());
 			
 			pst.executeUpdate();
 			return "added";
@@ -73,7 +72,7 @@ public class DTeacher
 	{
 		ArrayList<Teacher> teacherslist= new ArrayList<Teacher>();
 		getCon();
-		String query= "select teacher_id,teacher_name from teacher";
+		String query= "select teacher_id , teacher_name , teacher_password from teacher";
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
@@ -82,10 +81,14 @@ public class DTeacher
 			while(rs.next())
 			{
 				Teacher teacher = new Teacher();
+				
 				String teacher_id = rs.getString("teacher_id");
 				String teacher_name=rs.getString("teacher_name");
+				String teacher_password=rs.getString("teacher_password");
+
 				teacher.setTeacher_id(teacher_id);
 				teacher.setTeacher_name(teacher_name);
+				teacher.setTeacher_password(teacher_password);
 				teacherslist.add(teacher);
 			}
 		}
@@ -102,31 +105,26 @@ public class DTeacher
 	 * @param teacher_id
 	 * @return -1 or number of times coordinator has logged in
 	 */
-	public int countLogin(String teacher_id)
+	public String getPasswordVerification(String teacher_id)
 	{
-		getCon();		
+		getCon();	
+		String password="";
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			Statement st= con.createStatement();
 			
-			String query1= String.format("select countlogin from teacher where teacher_id=('%s')",teacher_id ) ;    
+			String query1= String.format("select teacher_password from teacher where teacher_id=('%s')",teacher_id ) ;    
 			ResultSet rs=st.executeQuery(query1);
 			rs.next();
-			int countlogin=rs.getInt("countlogin");
-			countlogin++;
-			
-			String query2=String.format("update teacher set countlogin=(%d) where teacher_id=('%s')",countlogin,teacher_id);
-			PreparedStatement pst=con.prepareStatement(query2);
-			pst.executeUpdate();
-			return countlogin;
+			password=rs.getString("teacher_password");
 		}
 		
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-			return -1;
 		}
+		return password;
 	}
 	
 	/**

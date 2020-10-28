@@ -38,7 +38,7 @@
 	section list
 		<table border="solid">
 			<tr>
-				<th>teachers</th>
+				<th>section</th>
 				<th>id</th>
 				<th>update</th>
 				<th>delete</th>

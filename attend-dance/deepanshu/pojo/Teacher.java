@@ -5,14 +5,7 @@ public class Teacher
 	private String teacher_name;
 	private String teacher_id;
 	private String teacher_password;
-	private int countlogin;
 	
-	public int getCountlogin() {
-		return countlogin;
-	}
-	public void setCountlogin(int countlogin) {
-		this.countlogin = countlogin;
-	}
 	public String getTeacher_name() {
 		return teacher_name;
 	}
