@@ -36,7 +36,7 @@
 	<!-- list of sections -->
 	
 	section list
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>section</th>
 				<th>id</th>

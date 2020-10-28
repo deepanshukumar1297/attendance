@@ -1,10 +1,15 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
+import pojo.GetMark;
 import pojo.Mark;
 
 public class DMark
@@ -54,5 +59,36 @@ public class DMark
 			return "exception occcured";
 		}
 	}
+	
+	public ArrayList<GetMark> fetchSectionAttendance(String section_id, String subject_id, String teacher_id) 
+	{
+		ArrayList<GetMark> studentsecattend_list= new ArrayList<GetMark>();
+		getCon();
+		String query= String.format("select student_id, attendance, date_of_attendance from mark where section_id=('%s') and subject_id=('%s') and teacher_id=('%s')",section_id,subject_id,teacher_id);
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			Statement st= con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while(rs.next())
+			{
+				GetMark getmark = new GetMark();
+			
+				String student_id = rs.getString("student_id");
+				String attendance = rs.getString("attendance");
+				Date date_of_attendance = rs.getDate("date_of_attendance");
 
+				getmark.setStudent_id(student_id);                      
+				getmark.setAttendance(attendance);
+				getmark.setDate_of_attendance(date_of_attendance); 
+				
+				studentsecattend_list.add(getmark);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return studentsecattend_list;
+	}
 }

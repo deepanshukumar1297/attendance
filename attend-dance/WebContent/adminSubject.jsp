@@ -32,7 +32,7 @@
 	</form>
 		<br><br><br>
 		subjects list
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>subject name</th>
 				<th>subject id</th>

@@ -48,7 +48,7 @@
         
         
         	section list
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>section name</th>
 				<th> section id</th>
@@ -68,7 +68,7 @@
     
     <br><br>
 		coordinator list
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>teacher id</th>
 				<th>section id</th>

@@ -57,7 +57,7 @@
 		
 		<br><br><br>
 		Student list
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>student name</th>
 				<th>student id</th>

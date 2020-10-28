@@ -32,7 +32,7 @@
 		<br>
 		<br><br><br>
 		teachers list
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>teacher name</th>
 				<th>teacher id</th>

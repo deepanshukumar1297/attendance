@@ -70,7 +70,7 @@
 		
 		<br><br><br>
 		teachers list
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>teachers</th>
 				<th>id</th>
@@ -89,7 +89,7 @@
 		</table>
 		<br><br>
 		section list
-		<table border="solid">
+		<table style="border: solid; border-color: yellow;">
 			<tr>
 				<th>teachers</th>
 				<th>id</th>
@@ -110,7 +110,7 @@
 		
 		<br><br><br>
 		coordinator list
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>teacher id</th>
 				<th>section id</th>

@@ -29,7 +29,7 @@
 	    <pre>WELCOME  <%=teacher_name%>    ID = <%= teacher_id%></pre> <br>
 		YOUR SUBJECTS AS A TEACHER(in following sections) ARE :-
 		<br>
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 				<tr>
 					<th>subject id</th>
 					<th>section id</th>

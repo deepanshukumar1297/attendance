@@ -87,7 +87,7 @@
 	<br><br><br>
 	LIST OF TEACHERS AND THEIR SUBJECTS
 	<br>
-	<table border="solid">
+	<table style="border: solid; border-color: red;">
 			<tr>
 				<th>subject id</th>
 				<th>teacher id</th>
@@ -101,8 +101,8 @@
 			<tr>
 				<td><%= sts.getSubject_id() %></td>
 				<td><%= sts.getTeacher_id() %></td>
-				<th><button>update</button></th>
-				<th><button>delete</button></th>
+				<td><button>update</button></td>
+				<td><button>delete</button></td>
 				<%
 					}
 				%>
@@ -111,7 +111,7 @@
 		<br><br>
 		LIST OF STUDENTS IN YOUR CLASS
 		<br>
-		<table border="solid">
+		<table style="border: solid; border-color: red;">
 			<tr>
 				<th>student id</th>
 				<th>student name</th>

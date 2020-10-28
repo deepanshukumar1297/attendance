@@ -43,8 +43,7 @@
         
         
         	TEACHERS LIST
-		<table border="solid">
-			<tr>
+		<table style="border: solid; border-color: red;">			<tr>
 				<th>teachers</th>
 				<th>id</th>
 			</tr>
