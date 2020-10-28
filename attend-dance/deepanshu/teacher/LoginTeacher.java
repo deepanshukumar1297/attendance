@@ -37,13 +37,26 @@ public class LoginTeacher extends HttpServlet {
 		session.setAttribute("teacher_password", teacher_password);
 		session.setAttribute("teacher_id", teacher_id);
 
-        
-        int countlogin=dteacher.countLogin(teacher_id);
-        
-		if(teacher_password.equalsIgnoreCase("password") && countlogin==1)                   //first time user
+               
+		if(teacher_password.equals("password") )                   //first time user
 		{
-			RequestDispatcher rd=request.getRequestDispatcher("chngPassTeacher.html");
-			rd.forward(request, response);
+	        String password=dteacher.getPasswordVerification(teacher_id);
+	        if(password.equals("*"))
+			{
+				RequestDispatcher rd=request.getRequestDispatcher("chngPassTeacher.html");
+				rd.forward(request, response);
+			}
+	        else if(password.equals("password"))
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("teacher.jsp");
+			 	rd.forward(request, response);
+			}
+	        else
+	        {
+	        	out.println("incorrect password");
+				RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
+			 	rd.include(request, response);
+	        }
 		}
 		else									                                             //regular user
 		{

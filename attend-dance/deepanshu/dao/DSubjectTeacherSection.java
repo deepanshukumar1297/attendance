@@ -29,6 +29,11 @@ public class DSubjectTeacherSection
 
 	}
 	
+	/**
+	 * 
+	 * @param subteachsec
+	 * @return status of insertion of teacher teaching the subjects in section
+	 */
 	public String insert(SubjectTeacherSection subteachsec)
 	{
 		getCon();
@@ -56,11 +61,16 @@ public class DSubjectTeacherSection
 		}	
 	}
 	
-	public ArrayList<SubjectTeacherSection> fetchSubjectTeacher(String coordiantor_sectionId) 
+	/**
+	 * 
+	 * @param section_id
+	 * @return list of subject teachers in particular section
+	 */
+	public ArrayList<SubjectTeacherSection> fetchSubjectTeacher(String section_id) 
 	{
 		ArrayList<SubjectTeacherSection> subteach_list= new ArrayList<SubjectTeacherSection>();
 		getCon();
-		String query=String.format ("select subject_id, teacher_id from teacher_section_subject where section_id=('%s')",coordiantor_sectionId);
+		String query=String.format ("select subject_id, teacher_id from teacher_section_subject where section_id=('%s')",section_id);
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
@@ -86,16 +96,57 @@ public class DSubjectTeacherSection
 		return subteach_list;
 	}
 	
-	public ArrayList<Student> fetchStudent(String coordiantor_sectionId) 
+	/**
+	 * 
+	 * @param teacher_id
+	 * @return list of subjects taught by particular teacher in a section
+	 */
+	public ArrayList<SubjectTeacherSection> fetchSubjectSection(String teacher_id) 
 	{
-		ArrayList<Student> secstudentlist= new ArrayList<Student>();
+		ArrayList<SubjectTeacherSection> subsec_list= new ArrayList<SubjectTeacherSection>();
 		getCon();
-		String query=String.format ("select student_name, student_id from student where section_id=('%s')",coordiantor_sectionId);
+		String query=String.format ("select subject_id, section_id from teacher_section_subject where teacher_id=('%s')",teacher_id);
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			Statement st= con.createStatement();
 			ResultSet rs = st.executeQuery(query);
+			while(rs.next())
+			{
+				SubjectTeacherSection subteachsec = new SubjectTeacherSection();
+				
+				String subject_id = rs.getString("subject_id");
+				String section_id = rs.getString("section_id");
+				
+				subteachsec.setSubject_id(subject_id);
+				subteachsec.setSection_id(section_id);
+				
+				subsec_list.add(subteachsec);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return subsec_list;
+	}
+	
+	/**
+	 * 
+	 * @param section_id
+	 * @return list of students in a particular section
+	 */
+	public ArrayList<Student> fetchStudent(String section_id) 
+	{
+		ArrayList<Student> secstudent_list= new ArrayList<Student>();
+		getCon();
+		String query=String.format ("select student_name, student_id from student where section_id=('%s')",section_id);
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			Statement st= con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+
 			while(rs.next())
 			{
 				Student secstudent = new Student();
@@ -106,16 +157,21 @@ public class DSubjectTeacherSection
 				secstudent.setStudent_name(student_name);
 				secstudent.setStudent_id(student_id);
 				
-				secstudentlist.add(secstudent);
+				secstudent_list.add(secstudent);
 			}
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
-		return secstudentlist;
+		return secstudent_list;
 	}
 	
+	/**
+	 * 
+	 * @param coordiantor_sectionId
+	 * @return information of coordinator
+	 */
 	public ArrayList<String> coordinatorInfo(String coordiantor_sectionId)
 	{
 		getCon();
@@ -147,6 +203,11 @@ public class DSubjectTeacherSection
 		return coordinatorinfo;
 	}
 	
+	/**
+	 * 
+	 * @param teacher_id
+	 * @return information of teacher
+	 */
 	public String teacherInfo(String teacher_id)
 	{
 		getCon();
@@ -170,33 +231,5 @@ public class DSubjectTeacherSection
 		return teacher_name;
 	}
 	
-	public ArrayList<SubjectTeacherSection> fetchSubjectSection(String teacher_id) 
-	{
-		ArrayList<SubjectTeacherSection> subsec_list= new ArrayList<SubjectTeacherSection>();
-		getCon();
-		String query=String.format ("select subject_id, section_id from teacher_section_subject where teacher_id=('%s')",teacher_id);
-		try
-		{
-			Connection con=DriverManager.getConnection(url, uname, pass);
-			Statement st= con.createStatement();
-			ResultSet rs = st.executeQuery(query);
-			while(rs.next())
-			{
-				SubjectTeacherSection subteachsec = new SubjectTeacherSection();
-				
-				String subject_id = rs.getString("subject_id");
-				String section_id = rs.getString("section_id");
-				
-				subteachsec.setSubject_id(subject_id);
-				subteachsec.setSection_id(section_id);
-				
-				subsec_list.add(subteachsec);
-			}
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return subsec_list;
-	}
+	
 }

@@ -29,23 +29,36 @@ public class LoginCoordinator extends HttpServlet {
 		PrintWriter out= response.getWriter();
 		DCoordinator dcoordinator = new DCoordinator();
 		
-		String coordiantor_sectionId = request.getParameter("coordiantor_sectionId");									//section id
-		String coordiantor_teacherPassword = request.getParameter("coordiantor_teacherPassword");
+		String coordinator_sectionId = request.getParameter("coordiantor_sectionId");									//section id
+		String coordinator_teacherPassword = request.getParameter("coordiantor_teacherPassword");
 		
 		HttpSession session=request.getSession();  
-        session.setAttribute("coordiantor_teacherPassword",coordiantor_teacherPassword);									 //session to pass the password so the that first time user can change it
-        session.setAttribute("coordiantor_sectionId",coordiantor_sectionId);											 //session for section
-        
-        int countlogin=dcoordinator.countLogin(coordiantor_sectionId);
-        
-		if(coordiantor_teacherPassword.equalsIgnoreCase("password") && countlogin==1)                           //first time user
+        session.setAttribute("coordiantor_teacherPassword",coordinator_teacherPassword);									 //session to pass the password so the that first time user can change it
+        session.setAttribute("coordiantor_sectionId",coordinator_sectionId);											 //session for section
+                 
+		if(coordinator_teacherPassword.equals("password"))                                                           //first time user
 		{
-			RequestDispatcher rd=request.getRequestDispatcher("chngPassCoordinator.html");
-			rd.forward(request, response);
+	        String password=dcoordinator.getPasswordVerification(coordinator_sectionId);
+	        if(password.equals("*"))
+			{
+				RequestDispatcher rd=request.getRequestDispatcher("chngPassCoordinator.html");
+				rd.forward(request, response);
+			}
+			else if(password.equals("password"))
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("coordinator.jsp");
+			 	rd.forward(request, response);
+			}
+			else
+			{
+				out.println("incorrect password");
+				RequestDispatcher rd = request.getRequestDispatcher("loginCoordinator.jsp");
+			 	rd.include(request, response);
+			}
 		}
-		else									                                                                //regular user
+		else 															                                                                //regular user
 		{
-			String validation=dcoordinator.passValidation(coordiantor_teacherPassword,coordiantor_sectionId);
+			String validation=dcoordinator.passValidation(coordinator_teacherPassword,coordinator_sectionId);
 			if(validation.equals("correct password"))
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("coordinator.jsp");

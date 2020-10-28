@@ -76,7 +76,7 @@ public class DCoordinator
 			{
 				Coordinator coordinator = new Coordinator();
 				String coordinator_sectionId = rs.getString("section_id");           //foreign key
-				String coordinator_teacherId=rs.getString("teacher_id");			//foreign key		
+				String coordinator_teacherId=rs.getString("teacher_id");			//foreign key	
 				coordinator.setCoordinator_sectionId(coordinator_sectionId);
 				coordinator.setCoordinator_teacherId(coordinator_teacherId);
 				coordinatorslist.add(coordinator);
@@ -131,36 +131,31 @@ public class DCoordinator
 	 * @param coordiantor_sectionId
 	 * @return -1 or number of times coordinator has logged in
 	 */
-	public int countLogin(String coordiantor_sectionId)
+	public String getPasswordVerification(String coordinator_sectionId )
 	{
+		String password="";
 		getCon();		
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			Statement st= con.createStatement();
 			
-			String query1= String.format("select teacher_id from coordinator where section_id=('%s') ",coordiantor_sectionId );
+			String query1= String.format("select teacher_id from coordinator where section_id=('%s') ",coordinator_sectionId );
 			ResultSet rs=st.executeQuery(query1);
 			rs.next();
 			String teacher_id=rs.getString("teacher_id");
 			
-			String query2= String.format("select countlogin from teacher where teacher_id=('%s') ",teacher_id );  
+			String query2= String.format("select teacher_password from teacher where teacher_id=('%s') ",teacher_id );  
 			rs=st.executeQuery(query2);
 			rs.next();
-			int countlogin=rs.getInt("countlogin");
-			countlogin++;
-			
-			String query3=String.format("update teacher set countlogin=(%d) where teacher_id=('%s')", countlogin,teacher_id);
-			PreparedStatement pst=con.prepareStatement(query3);
-			pst.executeUpdate();
-			return countlogin;
+			password = rs.getString("teacher_password"); 
 		}
-		
+	
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-			return -1;
 		}
+		return password;
 	}
 	
 	/**

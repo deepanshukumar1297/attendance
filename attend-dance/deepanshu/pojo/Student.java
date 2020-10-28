@@ -25,5 +25,4 @@ public class Student
 		this.student_sectionId = student_sectionId;
 	}
 
-
 }

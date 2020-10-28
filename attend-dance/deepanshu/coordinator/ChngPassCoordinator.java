@@ -38,36 +38,46 @@ public class ChngPassCoordinator extends HttpServlet {
 		HttpSession session=request.getSession(false);  
         String coordiantor_teacherPassword =(String) session.getAttribute("coordiantor_teacherPassword");
         String coordiantor_sectionId =(String) session.getAttribute("coordiantor_sectionId");
-
-        if(coordiantor_teacherPassword.equals(curr_pass))
+        
+        if(new_pass.length()>=6)			//length of current password must be 6 or more
         {
-        	if(new_pass.equals(new_pass2))
-        	{
-        		DCoordinator dcoordinator = new DCoordinator();
-        		String status=dcoordinator.updatePassword(new_pass,coordiantor_sectionId);
-        		
-        		if(status.equals("password changed"))
-        		{
-        			RequestDispatcher rd = request.getRequestDispatcher("coordinator.jsp");
-            		rd.forward(request, response);
-        		}
-        		else if(status.equals("exception occcured"))
-        		{
-        			out.print("SOMETHING WRONG IN SQL");
-        			RequestDispatcher rd = request.getRequestDispatcher("chngPassCoordinator.html");
-            		rd.include(request, response);
-        		}
-        	}
-        	else
-        	{
-        		out.println("YOUR NEW PASSSWORD DON'T MATCH");
-        		RequestDispatcher rd = request.getRequestDispatcher("chngPassCoordinator.html");
-        		rd.include(request, response);
-        	}
+	        if(coordiantor_teacherPassword.equals(curr_pass))
+	        {
+	        	if(new_pass.equals(new_pass2))
+	        	{
+	        		DCoordinator dcoordinator = new DCoordinator();
+	        		String status=dcoordinator.updatePassword(new_pass,coordiantor_sectionId);
+	        		
+	        		if(status.equals("password changed"))
+	        		{
+	        			out.print("PASSWORD CHANGED SUCCESSFULLY");
+	        			RequestDispatcher rd1 = request.getRequestDispatcher("loginCoordinator.jsp");
+	            		rd1.include(request, response);
+	        		}
+	        		else if(status.equals("exception occcured"))
+	        		{
+	        			out.print("SOMETHING WRONG IN SQL");
+	        			RequestDispatcher rd = request.getRequestDispatcher("chngPassCoordinator.html");
+	            		rd.include(request, response);
+	        		}
+	        	}
+	        	else
+	        	{
+	        		out.println("YOUR NEW PASSSWORD DON'T MATCH");
+	        		RequestDispatcher rd = request.getRequestDispatcher("chngPassCoordinator.html");
+	        		rd.include(request, response);
+	        	}
+	        }
+	        else
+	        {
+	        	out.println("YOUR CURRENT PASSWORD IS ENTERED WRONG");
+	    		RequestDispatcher rd = request.getRequestDispatcher("chngPassCoordinator.html");
+	    		rd.include(request, response);
+	        }
         }
         else
         {
-        	out.println("YOUR CURRENT PASSWORD IS ENTERED WRONG");
+        	out.println("YOUR CURRENT PASSWORD MUST BE EQUAL OR GREATER THAN 6 CHARACTER");
     		RequestDispatcher rd = request.getRequestDispatcher("chngPassCoordinator.html");
     		rd.include(request, response);
         }

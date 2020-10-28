@@ -37,7 +37,9 @@
 			DSubject dsubject = new DSubject();
 			ArrayList<Subject> subjectslist= dsubject.fetch();
         %>
-        
+    
+    <a href="chngPassCoordinator.html"><button>change password</button></a>    
+    
     <pre>WELCOME  <%= coordinatorinfo.get(1) %>   ID=<%= coordinatorinfo.get(0) %> </pre> <br>
 	YOU ARE COORDINATOR OF <%= coordiantor_sectionId %>
 	<br><br>
