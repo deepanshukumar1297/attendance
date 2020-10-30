@@ -10,15 +10,12 @@
 </head>
 <body>
 				<%
-				System.out.println("4");
-
 					String section_id = request.getParameter("section_id");
 					String subject_id = request.getParameter("subject_id");
 					String teacher_id = request.getParameter("teacher_id");
 
 					DMark dmark = new DMark();
 					ArrayList<GetMark> studentsecattend_list = dmark.fetchSectionAttendance(section_id, subject_id, teacher_id);
-					
 				%>
 		ATTTENDANCE LIST
 		<br>

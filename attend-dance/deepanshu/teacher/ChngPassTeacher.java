@@ -47,36 +47,36 @@ public class ChngPassTeacher extends HttpServlet {
 	        		
 	        		if(status.equals("password changed"))
 	        		{
-	        			out.print("PASSWORD CHANGED SUCCESSFULLY");
 	        			RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
 	            		rd.forward(request, response);
+	        			out.print("PASSWORD CHANGED SUCCESSFULLY");
 	        		}
 	        		else if(status.equals("exception occcured"))
 	        		{
-	        			out.print("SOMETHING WRONG IN SQL");
 	        			RequestDispatcher rd = request.getRequestDispatcher("chngPassTeacher.html");
 	            		rd.include(request, response);
+	        			out.print("SOMETHING WRONG IN SQL");
 	        		}
 	        	}
 	        	else
 	        	{
-	        		out.println("YOUR NEW PASSSWORD DON'T MATCH");
 	        		RequestDispatcher rd = request.getRequestDispatcher("chngPassTeacher.html");
 	        		rd.include(request, response);
+	        		out.println("YOUR NEW PASSSWORD DON'T MATCH");
 	        	}
 	        }
 	        else
 	        {
-	        	out.println("YOUR CURRENT PASSWORD IS ENTERED WRONG");
 	    		RequestDispatcher rd = request.getRequestDispatcher("chngPassTeacher.html");
 	    		rd.include(request, response);
+	        	out.println("YOUR CURRENT PASSWORD IS ENTERED WRONG");
 	        }
         }
 		else
         {
-        	out.println("YOUR CURRENT PASSWORD MUST BE EQUAL OR GREATER THAN 6 CHARACTER");
     		RequestDispatcher rd = request.getRequestDispatcher("chngPassTeacher.html");
     		rd.include(request, response);
+        	out.println("YOUR CURRENT PASSWORD MUST BE EQUAL OR GREATER THAN 6 CHARACTER");
         }
 	}
 

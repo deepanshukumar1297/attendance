@@ -53,9 +53,9 @@ public class LoginTeacher extends HttpServlet {
 			}
 	        else
 	        {
-	        	out.println("incorrect password");
 				RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
 			 	rd.include(request, response);
+	        	out.println("incorrect password");
 	        }
 		}
 		else									                                             //regular user
@@ -68,15 +68,15 @@ public class LoginTeacher extends HttpServlet {
 			}
 			else if(validation.equals("incorrect password"))
 			{
-				out.println("incorrect password");
 				RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
 			 	rd.include(request, response);
+				out.println("incorrect password");
 			}
 			else if(validation.equals("exception occcured"))
 			{
-				out.println("something wrong in database");
 				RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
 			 	rd.include(request, response);
+				out.println("something wrong in database");
 			}
 		}
 	}
