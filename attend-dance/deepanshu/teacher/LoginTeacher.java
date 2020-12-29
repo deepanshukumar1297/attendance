@@ -1,7 +1,6 @@
 package teacher;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,19 +24,17 @@ public class LoginTeacher extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		PrintWriter out= response.getWriter();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		DTeacher dteacher = new DTeacher();
-		
+
 		String teacher_id = request.getParameter("teacher_id");
-		String teacher_password = request.getParameter("teacher_password");	
-		
+		String teacher_password = request.getParameter("password");
+
 		HttpSession session = request.getSession();
 		session.setAttribute("teacher_password", teacher_password);
 		session.setAttribute("teacher_id", teacher_id);
-
-               
+		
 		if(teacher_password.equals("password") )                   //first time user
 		{
 	        String password=dteacher.getPasswordVerification(teacher_id);
@@ -51,12 +48,8 @@ public class LoginTeacher extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("teacher.jsp");
 			 	rd.forward(request, response);
 			}
-	        else
-	        {
-				RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
-			 	rd.include(request, response);
-	        	out.println("incorrect password");
-	        }
+	        else response.getWriter().write("0");		//wrong password
+	        
 		}
 		else									                                             //regular user
 		{
@@ -66,19 +59,13 @@ public class LoginTeacher extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("teacher.jsp");
 			 	rd.forward(request, response);
 			}
-			else if(validation.equals("incorrect password"))
-			{
-				RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
-			 	rd.include(request, response);
-				out.println("incorrect password");
-			}
-			else if(validation.equals("exception occcured"))
-			{
-				RequestDispatcher rd = request.getRequestDispatcher("loginTeacher.jsp");
-			 	rd.include(request, response);
-				out.println("something wrong in database");
-			}
+			else if(validation.equals("incorrect password"))response.getWriter().write("0");
+			
+			else if(validation.equals("exception occcured"))response.getWriter().write("1");
+			
 		}
+
 	}
+
 
 }

@@ -1,7 +1,6 @@
 package coordinator;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,11 +25,10 @@ public class LoginCoordinator extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		PrintWriter out= response.getWriter();
 		DCoordinator dcoordinator = new DCoordinator();
 		
 		String coordinator_sectionId = request.getParameter("coordiantor_sectionId");									//section id
-		String coordinator_teacherPassword = request.getParameter("coordiantor_teacherPassword");
+		String coordinator_teacherPassword = request.getParameter("password");
 		
 		HttpSession session=request.getSession();  
         session.setAttribute("coordiantor_teacherPassword",coordinator_teacherPassword);									 //session to pass the password so the that first time user can change it
@@ -49,12 +47,8 @@ public class LoginCoordinator extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("coordinator.jsp");
 			 	rd.forward(request, response);
 			}
-			else
-			{
-				RequestDispatcher rd = request.getRequestDispatcher("loginCoordinator.jsp");
-			 	rd.include(request, response);
-				out.println("incorrect password");
-			}
+			else response.getWriter().write("0");
+			
 		}
 		else 															                                                                //regular user
 		{
@@ -64,18 +58,10 @@ public class LoginCoordinator extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("coordinator.jsp");
 			 	rd.forward(request, response);
 			}
-			else if(validation.equals("incorrect password"))
-			{
-				RequestDispatcher rd = request.getRequestDispatcher("loginCoordinator.jsp");
-			 	rd.include(request, response);
-			 	out.println("incorrect password");
-			}
-			else if(validation.equals("exception occcured"))
-			{
-				RequestDispatcher rd = request.getRequestDispatcher("loginCoordinator.jsp");
-			 	rd.include(request, response);
-				out.println("something wrong in database");
-			}
+			else if(validation.equals("incorrect password"))response.getWriter().write("0");
+			
+			else if(validation.equals("exception occcured"))response.getWriter().write("1");
+			
 		}
 	}
 

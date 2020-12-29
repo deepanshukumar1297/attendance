@@ -1,10 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%><%@ page import="java.util.ArrayList" %>
-<%@ page import="pojo.Student" %>
-<%@ page import="dao.DStudent"%>
-<%@ page import="pojo.Section" %>
-<%@ page import="dao.DSection"%>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,20 +7,12 @@
     content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/bootstrap.css">
     
-  <title>admin</title>
+  <title>admin teacher</title>
  
 </head>
 
 <body style="background-color: rgb(233, 235, 221);">
 
-				<%
-					DStudent dstudent = new DStudent();
-					DSection dsection = new DSection();      //for getting section_id since it is foreign key
-					
-					ArrayList<Student> studentslist= dstudent.fetch();
-					ArrayList<Section> sectionslist= dsection.fetch();
-				%>
-				
     <!---------------    header     -------------->
   
     <div class="container-fluid bg-info ">
@@ -59,49 +44,33 @@
 	  </div>
 
 	    <!---------------    main     -------------->
-		<form id="verification" class="container-fluid">
+		<form id="verification" class="container-fluid my-3" >
 			<div class="row justify-content-center">
 				<div class="col-6 border border-primary rounded bg-info">
 					
 					<div class="row bg-primary">
 						<div class="col text-monospace">
-							<header class="text-center font-weight-bold my-3">ADD NEW STUDENT</header>
+							<header class="text-center font-weight-bold my-3">ADD NEW TEACHER</header>
 						</div>
 					</div>
 	
-					<div class="row">
+					<div class="row my-2">
 						<div class="col text-light">
-							<label for="student_name " class="text-reset">Name</label>
-							<input type="text" id="student_name"
-							placeholder="Name Of The Student" class="form-control" required>
+							<label for="teacher_name " class="text-reset">Name</label>
+							<input type="text" id="teacher_name"
+							placeholder="Name Of The Teacher" class="form-control" required>
 						</div>	
 					</div>
 			
-					<div class="row">
+					<div class="row my-3">
 						<div class="col text-light">
-							<label for="student_id" class="text-reset">ID</label>
-							<input type="text" id="student_id" 
-							placeholder="Enter Student ID" class="form-control" required>
+							<label for="teacher_id" class="text-reset">ID</label>
+							<input type="text" id="teacher_id" 
+							placeholder="Enter Teacher ID" class="form-control" required>
 						</div>
 					</div>
 
-					<div class="row my-3">
-						<div class="col">
-							<select id="student_sectionId" class="custom-select" required>
-								<option  hidden selected disabled >choose section</option>
-								<% 
-									for(Section t:sectionslist)
-									{
-								%>
-								<option><%= t.getSection_id() %> </option>
-								<%
-									}
-								%>
-							</select>
-						</div>
-					</div>
-			
-					<div class="row my-3">
+					<div class="row mb-4 mt-5">
 						<div class="col">
 							<input type="submit" value="ADD"
 							class="btn btn-block btn-outline-light">
@@ -126,14 +95,14 @@
 		<div class="container-fluid mt-3">
 			<div class="row justify-content-center">
 				<div class="col-6 bg-primary border border-primary rounded text-monospace">
-					<a href="adminStudentChooseSection.jsp" class="btn btn-block btn-outline-light my-2">UPDATE OR DELETE STUDENT</a>
+					<a href="adminTeacherUpDel.jsp" class="btn btn-block btn-outline-light my-2">UPDATE OR DELETE TEACHER</a>
 				</div>
 			</div>
 		</div>
 	
 <!---------------    footer     -------------->
 
-<footer  class="container-fluid bg-info mt-5">
+<footer  class="container-fluid bg-info mt-4">
 	<div class="row p-3">
 		<div class="col-7 text-monospace">
 			<a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
@@ -149,16 +118,16 @@
 <script>
 	document.getElementById("verification").addEventListener("submit",fire);
 	function fire(e) {
-	if (document.getElementById("student_sectionId").value== "choose section" || document.getElementById("student_id").value== "" || document.getElementById("student_name").value== "") {
+	if (document.getElementById("teacher_id").value== "" || document.getElementById("teacher_name").value== "") {
 		//alert("please choose section");   this doesnot stop the execution of program
 		throw alert("please fill out all the fields");
 	}
 	e.preventDefault();
 	//creating url pattern
-	var student_name=document.getElementById("student_name").value;  
-	var student_id=document.getElementById("student_id").value;  
-	var student_sectionId=document.getElementById("student_sectionId").value;  
-	var url="AdminStudent?student_name="+student_name+"&student_id="+student_id+"&student_sectionId="+student_sectionId;
+	var teacher_name=document.getElementById("teacher_name").value;  
+	var teacher_id=document.getElementById("teacher_id").value;  
+	var url="AdminTeacher?teacher_name="+teacher_name+"&teacher_id="+teacher_id;
+	console.log(url);
 	
 	
 	//create xhr object
@@ -174,7 +143,7 @@
 			document.getElementById("design").classList.add("rounded");
 			if(res=="0")
 			   {
-				document.getElementById("response").innerHTML="Student added";
+				document.getElementById("response").innerHTML="teacher added";
 				}
 			if(res=="1")
 			   {

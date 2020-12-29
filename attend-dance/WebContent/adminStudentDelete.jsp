@@ -58,13 +58,13 @@
 
 	<!---------------    main     -------------->
 
-	<form class="container mt-3" id="update">
+	<form class="container mt-3" id="delete">
         <div class="row justify-content-center">
             <div class="col-6 border border-primary rounded bg-info">
 
                 <div class="row bg-primary">
                     <div class="col text-monospace">
-                        <header class="text-center font-weight-bold my-3">update information</header>
+                        <header class="text-center font-weight-bold my-3">delete information</header>
                     </div>
                 </div>
 
@@ -72,22 +72,22 @@
                     <div class="col text-light">
                         <label for="student_name " class="text-reset">Name</label>
                         <input type="text" id="student_name"
-                        placeholder="Name Of The Student" class="form-control" value="<%=student_name%>" required>
+                        class="form-control" value="<%=student_name%>" required readonly>
                     </div>	
                 </div>
         
                 <div class="row my-3">
                     <div class="col text-light">
                         <label for="student_id" class="text-reset">ID</label>
-                        <input type="text" id="new_student_id" 
-                        placeholder="Enter Student ID" class="form-control" value="<%=student_id%>" required>
+                        <input type="text" id="student_id" 
+                        class="form-control" value="<%=student_id%>" required readonly>
                     </div>
                 </div>
 
                 <div class="row my-5">
                     <div class="col">
-                        <input type="submit" value="UPDATE" id="submit_botton"
-                        class="btn btn-block btn-outline-warning">
+                        <input type="submit" value="DELETE" id="submit_botton"
+                        class="btn btn-block btn-outline-danger">
                     </div>
                 </div>
 
@@ -125,17 +125,15 @@
     <!-----------    script     --------------->
 
     <script>
-        document.getElementById("update").addEventListener("submit",fire);
+        document.getElementById("delete").addEventListener("submit",fire);
         function fire(e) {
-        if (document.getElementById("new_student_id").value == "" || document.getElementById("student_name").value== "") {
+        if (document.getElementById("student_id").value !== "<%= student_id %>" || document.getElementById("student_name").value !== "<%= student_name %>") {
             //alert("please choose section");   this doesnot stop the execution of program
             throw alert("please fill out all the fields");
         }
         e.preventDefault();
         //creating url pattern
-        var student_name=document.getElementById("student_name").value;  
-        var new_student_id=document.getElementById("new_student_id").value;  
-        var url="AdminStudentUpdate?student_name="+student_name+"&new_student_id="+new_student_id+"&student_sectionId=<%=section_id %>&student_id=<%=student_id %>";
+        var url="AdminStudentDelete?student_id=<%=student_id %>";
        
         //create xhr object
         var xhr = new XMLHttpRequest();
@@ -150,16 +148,14 @@
                 document.getElementById("design").classList.add("rounded");
                 if(res=="0")
                    {
-                    document.getElementById("response").innerHTML="updated";
+                    document.getElementById("response").innerHTML="deleted";
                     document.getElementById("student_name").value="";
-                    document.getElementById("new_student_id").value="";
-                    document.getElementById('student_name').readOnly = true;
-                    document.getElementById('new_student_id').readOnly = true; 
+                    document.getElementById("student_id").value="";
                     document.getElementById("submit_botton").disabled= true;
                     }
                 if(res=="1")
                    {
-                    document.getElementById("response").innerHTML="can't update";
+                    document.getElementById("response").innerHTML="can't delete";
                    }
                 if(res=="2")
                    {	

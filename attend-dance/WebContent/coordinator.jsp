@@ -24,7 +24,7 @@
 	        String coordiantor_sectionId=(String)session.getAttribute("coordiantor_sectionId");
 			
 			DSubjectTeacherSection dsubteachsec = new DSubjectTeacherSection();
-			ArrayList<String> coordinatorinfo = dsubteachsec.coordinatorInfo(coordiantor_sectionId);     //teacher_id,teacher_name
+			ArrayList<String> coordinatorinfo = dsubteachsec.coordinatorInfo(coordiantor_sectionId);                     //teacher_id,teacher_name
 			ArrayList<SubjectTeacherSection> subteach_list = dsubteachsec.fetchSubjectTeacher(coordiantor_sectionId);  
 			ArrayList<Student> secstudentlist = dsubteachsec.fetchStudent(coordiantor_sectionId);     
 
