@@ -91,5 +91,94 @@ public class DStudent
 		}
 		return studentslist;
 	}
+	
+	/**
+	 * 
+	 * @param section_id
+	 * @return return list of students of given section
+	 */
+	public ArrayList<Student> fetch(String section_id) 
+	{
+		ArrayList<Student> studentslist= new ArrayList<Student>();
+		getCon();
+		String query= "select student_id ,student_name from student ORDER BY student_name, student_id where section_id="+section_id;
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			Statement st= con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while(rs.next())
+			{
+				Student student = new Student();
+				String student_id = rs.getString("student_id");
+				String student_name=rs.getString("student_name");
+				student.setStudent_id(student_id);
+				student.setStudent_name(student_name);
+				studentslist.add(student);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return studentslist;
+	}
+	
+	
+	/**
+	 * 
+	 * @param student_id
+	 * @return status of update of student info
+	 */
+	public String update(Student student, String student_id) 
+	{
+		getCon();
+		String query= "update student set student_name=? , student_id=? , section_id=? where student_id=?"; 
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			PreparedStatement pst= con.prepareStatement(query);
+			pst.setString(1, student.getStudent_name());
+			pst.setString(2, student.getStudent_id());
+			pst.setString(3, student.getStudent_sectionId());
+			pst.setString(4, student_id);
+						
+			int i=pst.executeUpdate();
+			if(i>0)return "updated";
+			else return "not updated";
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return "exception occcured";
+		}
+	}
+
+	/**
+	 * 
+	 * @param student
+	 * @return status of deletion of student info
+	 */
+	public String delete(Student student) {
+		getCon();
+		String query= "delete from student where student_id=?"; 
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			PreparedStatement pst= con.prepareStatement(query);
+			pst.setString(1, student.getStudent_id());
+					
+			int i=pst.executeUpdate();
+			if(i>0)return "info deleted";
+			else return "can't delete";
+		}
+		
+		catch(SQLException e)
+		{
+			//e.printStackTrace();
+			return "exception occcured";
+		}
+	}
 
 }

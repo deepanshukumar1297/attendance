@@ -106,6 +106,7 @@ public class DCoordinator
 			
 			String query1= String.format("select teacher_id from coordinator where section_id=('%s') ",coordiantor_sectionId ); 
 			ResultSet rs=st.executeQuery(query1);
+			System.out.println(query1);
 			rs.next();
 			String teacher_id=rs.getString("teacher_id");
 			
@@ -120,7 +121,7 @@ public class DCoordinator
 		
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 			return "exception occcured";
 		}
 	}

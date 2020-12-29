@@ -157,6 +157,12 @@ public class DTeacher
 		}
 	}
 
+	/**
+	 * 
+	 * @param teacher_password
+	 * @param teacher_id
+	 * @return status of password changed
+	 */
 	public String updatePassword(String teacher_password, String teacher_id)
 	{
 		getCon();		
@@ -169,6 +175,62 @@ public class DTeacher
 			st.executeUpdate(query1);
 			
 			return "password changed";
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return "exception occcured";
+		}
+	}
+
+	/**
+	 * 
+	 * @param teacher
+	 * @param teacher_id
+	 * @return return status of update of teachers
+	 */
+	public String update(Teacher teacher, String teacher_id) {
+		
+		getCon();
+		String query= "update teacher set teacher_name=? , teacher_id=? where teacher_id=?"; 
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			PreparedStatement pst= con.prepareStatement(query);
+			pst.setString(1, teacher.getTeacher_name());
+			pst.setString(2, teacher.getTeacher_id());
+			pst.setString(3, teacher_id);
+						
+			int i=pst.executeUpdate();
+			if(i>0)return "updated";
+			else return "not updated";
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return "exception occcured";
+		}
+	}
+
+	/**
+	 * 
+	 * @param teacher
+	 * @return status of deletion of teacher info
+	 */
+	public String delete(Teacher teacher) {
+		getCon();
+		String query= "delete from teacher where teacher_id=?"; 
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			PreparedStatement pst= con.prepareStatement(query);
+			pst.setString(1, teacher.getTeacher_id());
+							
+			int i=pst.executeUpdate();
+			if(i>0)return "info deleted";
+			else return "can't delete";
 		}
 		
 		catch(SQLException e)

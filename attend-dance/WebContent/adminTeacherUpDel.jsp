@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="pojo.Section" %>
-<%@page import="dao.DSection"%>
+<%@ page import="pojo.Teacher" %>
+<%@page import="dao.DTeacher"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,17 +11,18 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="css/bootstrap.css">
 
-<title>Student_section</title>
+<title>HOME</title>
 
 </head>
 <body style="background-color: rgb(233, 235, 221);">
-				<%
-					DSection dteacher = new DSection();
-					ArrayList<Section> sectionslist= dteacher.fetch();
-				%>
 
 
-		<!---------------    header     -------------->
+	<%
+        DTeacher dteacher = new DTeacher();
+        ArrayList<Teacher> teacherslist= dteacher.fetch();
+    %>
+
+	<!---------------    header     -------------->
 
 	<div class="container-fluid bg-info ">
 		<div class="row">
@@ -64,7 +65,7 @@
 			<div class="row bg-primary sticky-top">
 				<div class="col text-monospace">
 					<header class="text-center font-weight-bold my-3">
-						choose your section
+						LIST OF TEACHERS
 					</header>
 				</div>
 			</div>
@@ -77,24 +78,28 @@
 
 						<thead>
 							<tr>
-								<th>SECTION</th>
+								<th>NAME</th>
 								<th>ID</th>
-								<th>DETAILS</th>
+								<th>ACTION</th>
 							</tr>
 						</thead>
 
 						<tbody>
 
-							<% 
-								for(Section s:sectionslist)
-								{
-							%>
+                                <% 
+                                    for(Teacher t:teacherslist)
+                                    {
+                                %>
 							<tr>
-								<td id="student_id"><%= s.getSection_name().toUpperCase() %></td>
-								<td id="student_name"><%= s.getSection_id().toUpperCase() %></td>
+								<td id="teacher_name"><%= t.getTeacher_name().toUpperCase() %></td>
+								<td id="teacher_id"><%= t.getTeacher_id().toUpperCase() %></td>
 								<td><a
-									href="studentSectionDetails.jsp?section_id=<%= s.getSection_id() %>"
-									class="btn btn-sm btn-outline-primary btn-block">view</a>
+									href="adminTeacherUpdate.jsp?teacher_id=<%= t.getTeacher_id() %>&teacher_name=<%= t.getTeacher_name() %>"
+									class="btn btn-sm btn-outline-warning badge rounded-pill">update</a>
+                                    <a
+                                    href="adminTeacherDelete.jsp?teacher_id=<%= t.getTeacher_id() %>&teacher_name=<%= t.getTeacher_name() %>"
+                                    class="btn btn-sm btn-outline-danger badge rounded-pill">delete</a>								
+                                </td>
 							</tr>
 
 							<%
@@ -110,10 +115,19 @@
 	</div>
     </main>
     
+	<!---------------    suggestion     -------------->
 
+	<div class="container my-2">
+		<div class="row justify-content-center">
+			<div class="col-5 bg-warning text-monospace border border-danger rounded">
+				<span class="text-center font-weight-bold my-3">please reload the page after updation or deletion</span>
+			</div>
+		</div>
+	</div>
+   
 	<!---------------    footer     -------------->
 
-	<footer class="container-fluid bg-info mt-5">
+	<footer class="container-fluid bg-info mt-3">
 		<div class="row p-3">
 			<div class="col-7 text-monospace">
 				<a href="https://www.medicaps.ac.in" class="text-reset">MEDICAPS-UNIVERSITY</a>

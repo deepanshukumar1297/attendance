@@ -26,8 +26,6 @@ public class AdminTeacher extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd=request.getRequestDispatcher("adminTeacher.jsp");
-		PrintWriter out = response.getWriter();
 		
 		response.setContentType("text/html");
 		
@@ -39,31 +37,12 @@ public class AdminTeacher extends HttpServlet {
 		teacher.setTeacher_id(teacher_id);
 		teacher.setTeacher_password(teacher_password);
 		
-		if(teacher_name.equals("") || teacher_id.equals(""))
-		{
-			out.print("DON'T LEAVE THE FIELD EMPTY");
-			rd.include(request, response);
-		}
-		else
-		{			
-			String inserted=dteacher.insert(teacher);
+		String inserted=dteacher.insert(teacher);
 
-			if(inserted.equals("added"))
-			{
-				out.print("TEACHER IS ADDED");
-				rd.include(request, response);
-			}
-			else if(inserted.equals("duplicate entry"))
-			{
-				out.print("THIS TEACHER ID ALREADY EXISTS");
-				rd.include(request, response);
-			}
-			else if(inserted.equals("exception occcured"))
-			{
-				out.print("EXCEPTION OCCURED IN SQL");
-				rd.include(request, response);
-			}
-		}
+		if(inserted.equals("added"))response.getWriter().write("0");
+		else if(inserted.equals("duplicate entry"))response.getWriter().write("1");	
+		else if(inserted.equals("exception occcured"))response.getWriter().write("2");
+		
 	}
 
 }

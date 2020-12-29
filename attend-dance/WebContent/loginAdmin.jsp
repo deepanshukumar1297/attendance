@@ -1,14 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-
-<%@ page import="java.util.ArrayList" %>
-
-<%@ page import="pojo.Coordinator" %>
-<%@page import="dao.DCoordinator"%>
-
-<%@ page import="pojo.Section" %>
-<%@page import="dao.DSection"%>
-
+    pageEncoding="utf-8"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,18 +10,22 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 
 
-<title>Login Teacher</title>
+<title>Login Admin</title>
 
+
+<!-- <style>
+		.container{
+			border: 8px solid rgb(21, 255, 0) ;
+		}
+		.row{
+			border: 8px solid rgb(219, 20, 20) ;
+		}
+		.col,.col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
+			border: 8px solid rgb(38, 0, 255) ;
+		}
+	</style> -->
 </head>
 <body style="background-color: rgb(233, 235, 221);">
-
-		<%
-			DSection dsection = new DSection();
-			ArrayList<Section> sectionslist= dsection.fetch();
-			
-			DCoordinator dcoordiantor = new DCoordinator();
-			ArrayList<Coordinator> coordinatorslist= dcoordiantor.fetch();
-		%>
 
 	<!---------------    header     -------------->
 
@@ -52,7 +47,7 @@
 					<ol class="breadcrumb"
 						style="background-color: rgb(233, 235, 221);">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item active">Coordinator Login</li>
+						<li class="breadcrumb-item active">Admin Login</li>
 					</ol>
 				</nav>
 			</div>
@@ -70,19 +65,14 @@
 					</div>
 				</div>
 
-				<div class="row  my-3">
+				<div class="row  mt-3">
 					<div class="col">
-						<select id="coordiantor_sectionId" class="custom-select" required>
-							<option hidden selected disabled>choose your section</option>
-							<% 
-								for(Section s:sectionslist)
-								{
-							%>
-	            			<option><%=s.getSection_id() %></option>
-							<%
-								}
-							%>
-	            	</select>
+						<div class="form-group text-light">
+							<label for="username" class="text-reset">Username</label>
+							<input type="text" id="username"
+							placeholder="Enter Username" class="form-control">
+							<div id="res-name" class="mx-3"></div>
+						</div>
 					</div>	
 				</div>
 		
@@ -134,14 +124,14 @@
 	<script>
 			document.getElementById("verification").addEventListener("submit",fire);
 		    function fire(e) {
-		 	if (document.getElementById("coordiantor_sectionId").value== "choose your section" || document.getElementById("password").value== "") {
+		 	if (document.getElementById("username").value== "" || document.getElementById("password").value== "") {
 		 	throw alert("please fill out all the fields");
 	        }
 		    e.preventDefault();
             //creating url pattern
-            var coordiantor_sectionId=document.getElementById("coordiantor_sectionId").value;  
+            var email=document.getElementById("username").value;  
             var password=document.getElementById("password").value;  
-			var url="LoginCoordinator";
+			var url="LoginAdmin";
 			
             
             //create xhr object
@@ -155,13 +145,13 @@
 					var res = xhr.responseText;
 					if(res == "0")
 					{
-						document.getElementById("password").classList.add("is-invalid");
-						document.getElementById("res-pass").innerHTML="incorrect password";
-						document.getElementById("res-pass").classList.add("invalid-tooltip");
+						document.getElementById("username").classList.add("is-invalid");
+						document.getElementById("res-name").innerHTML="invalid username";
+						document.getElementById("res-name").classList.add("invalid-tooltip");
 					}
 					else if (res == "1") {
 						document.getElementById("password").classList.add("is-invalid");
-						document.getElementById("res-pass").innerHTML="something unexpected occured, contact admin";
+						document.getElementById("res-pass").innerHTML="wrong password";
 						document.getElementById("res-pass").classList.add("invalid-tooltip");
 					} 
 					else {
@@ -169,17 +159,16 @@
 						opened.document.write(res);
 					}
 				}
-				else 
+				else if (this.status == 404) 
 				{
 					document.getElementById("design").classList.add("border");
 					document.getElementById("design").classList.add("border-danger");
 					document.getElementById("design").classList.add("rounded");
 					document.getElementById("response").innerHTML="something went wrong";		
 				}
-
             }
 			
-            xhr.send("coordiantor_sectionId="+coordiantor_sectionId+"&password="+password);
+            xhr.send("email="+email+"&password="+password);
         }
     </script>
   </body>

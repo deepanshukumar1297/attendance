@@ -41,32 +41,14 @@ public class AdminSubject extends HttpServlet {
 		
 		subject.setSubject_name(subject_name);
 		subject.setSubject_id(subject_id);
-		
-		if(subject_name.equals("") || subject_id.equals(""))
-		{
-			out.print("DON'T LEAVE THE FIELD EMPTY");
-			rd.include(request, response);
-		}
-		else
-		{			
-			String inserted=dsubject.insert(subject);
+					
+		String inserted=dsubject.insert(subject);
 
-			if(inserted.equals("added"))
-			{
-				out.print("SUBJECT IS ADDED");
-				rd.include(request, response);
-			}
-			else if(inserted.equals("duplicate entry"))
-			{
-				out.print("THIS SUBJECT ALREADY EXISTS");
-				rd.include(request, response);
-			}
-			else if(inserted.equals("exception occcured"))
-			{
-				out.print("EXCEPTION OCCURED IN SQL");
-				rd.include(request, response);
-			}
-		}
+		if(inserted.equals("added"))response.sendRedirect("admin.jsp");
+		if(inserted.equals("duplicate entry"))response.sendRedirect("admin.jsp");
+		if(inserted.equals("exception occcured"))response.sendRedirect("admin.jsp");
+			
+		
 	}
 
 }

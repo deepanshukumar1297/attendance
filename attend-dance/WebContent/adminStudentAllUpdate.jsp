@@ -2,6 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.ArrayList"%>
 <%@page import="pojo.Student"%>
+<%@ page import="pojo.Section" %>
+<%@ page import="dao.DSection"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,7 +21,9 @@
         String section_id = request.getParameter("section_id");
         String student_id = request.getParameter("student_id");
         String student_name = request.getParameter("student_name");
-        
+
+        DSection dsection = new DSection();      
+        ArrayList<Section> sectionslist= dsection.fetch();
 	%>
 	
 
@@ -78,9 +82,25 @@
         
                 <div class="row my-3">
                     <div class="col text-light">
-                        <label for="student_id" class="text-reset">ID</label>
+                        <label for="new_student_id" class="text-reset">ID</label>
                         <input type="text" id="new_student_id" 
                         placeholder="Enter Student ID" class="form-control" value="<%=student_id%>" required>
+                    </div>
+                </div>
+
+                <div class="row my-3">
+                    <div class="col">
+                        <select id="student_sectionId" class="custom-select"  required>
+                            <option  hidden selected disabled ><%= section_id %></option>
+                            <% 
+                                for(Section t:sectionslist)
+                                {
+                            %>
+                            <option><%= t.getSection_id() %> </option>
+                            <%
+                                }
+                            %>
+                        </select>
                     </div>
                 </div>
 
@@ -125,6 +145,7 @@
     <!-----------    script     --------------->
 
     <script>
+
         document.getElementById("update").addEventListener("submit",fire);
         function fire(e) {
         if (document.getElementById("new_student_id").value == "" || document.getElementById("student_name").value== "") {
@@ -135,7 +156,8 @@
         //creating url pattern
         var student_name=document.getElementById("student_name").value;  
         var new_student_id=document.getElementById("new_student_id").value;  
-        var url="AdminStudentUpdate?student_name="+student_name+"&new_student_id="+new_student_id+"&student_sectionId=<%=section_id %>&student_id=<%=student_id %>";
+        var student_sectionId=document.getElementById("student_sectionId").value;    
+        var url="AdminStudentUpdate?student_name="+student_name+"&new_student_id="+new_student_id+"&student_sectionId="+student_sectionId+"&student_id=<%=student_id %>";
        
         //create xhr object
         var xhr = new XMLHttpRequest();
@@ -153,6 +175,7 @@
                     document.getElementById("response").innerHTML="updated";
                     document.getElementById("student_name").value="";
                     document.getElementById("new_student_id").value="";
+                    document.getElementById("student_sectionId").value="";
                     document.getElementById('student_name').readOnly = true;
                     document.getElementById('new_student_id').readOnly = true; 
                     document.getElementById("submit_botton").disabled= true;
