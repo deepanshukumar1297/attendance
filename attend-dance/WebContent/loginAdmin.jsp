@@ -13,28 +13,16 @@
 <title>Login Admin</title>
 
 
-<!-- <style>
-		.container{
-			border: 8px solid rgb(21, 255, 0) ;
-		}
-		.row{
-			border: 8px solid rgb(219, 20, 20) ;
-		}
-		.col,.col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
-			border: 8px solid rgb(38, 0, 255) ;
-		}
-	</style> -->
 </head>
-<body style="background-color: rgb(233, 235, 221);">
-
+<body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
+        
 	<!---------------    header     -------------->
-
-	<div class="container-fluid bg-info ">
-		<div class="row">
-			<div class="col text-monospace ">
-				<header class="lead font-weight-bold text-center text-light p-2">
-					ATTENDANCE MANAGEMENT SYSTEM </header>
-			</div>
+	
+	<div  class="container-fluid bg-info ">
+		<div class="row align-content-around" style="height: 3rem;">
+			<header class="col text-monospace lead font-weight-bold text-center text-light ">
+				ATTENDANCE MANAGEMENT SYSTEM
+			</header>
 		</div>
 	</div>
 
@@ -75,7 +63,7 @@
 						</div>
 					</div>	
 				</div>
-		
+				
 				<div class="row mt-5">
 					<div class="col">
 						<div class="form-group text-light">
@@ -87,7 +75,7 @@
 					</div>
 				</div>
 		
-				<div class="row mt-5 mb-3">
+				<div class="row mt-5 mb-4">
 					<div class="col">
 						<input type="submit" value="submit"
 						class="btn btn-block btn-outline-light">
@@ -109,16 +97,24 @@
 
 	
     <!---------------    footer     -------------->
-	<footer class="container-fluid bg-info mt-5">
-		<div class="row p-3">
-			<div class="col-7 text-monospace">
-				<a href="https://www.medicaps.ac.in" class="text-reset">MEDICAPS-UNIVERSITY</a>
-			</div>
-			<div class="col-5">
-				<span class="font-weight-bold text-monospace">BY: </span> <span> Darshika | Dev | Gurneet | Deepanshu </span>
-			</div>
-		</div>
-	</footer>
+	<footer  class="container-fluid bg-info">
+            <div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+                <div class="col-5 ">
+                    <a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+                </div>
+                <div class="col-4">
+                    <span>
+                        BY: 
+                    </span>
+                    <span>
+                        <a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+                        <a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+                        <a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+                        <a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+                    </span>
+                </div>
+            </div>
+        </footer>
 
 	
 	<script>

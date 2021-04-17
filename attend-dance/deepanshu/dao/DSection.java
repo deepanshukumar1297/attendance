@@ -81,4 +81,31 @@ public class DSection
 		}
 		return sectionslist;
 	}
+	
+	public ArrayList<Section> fetchonly() 
+	{
+		ArrayList<Section> sectionslist= new ArrayList<Section>();
+		getCon();
+		String query= "select * from section where section_id NOT IN(select section_id from coordinator );";
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			Statement st= con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while(rs.next())
+			{
+				Section section = new Section();
+				String section_id = rs.getString("section_id");			//foreign key for student as section
+				String section_name=rs.getString("section_name");
+				section.setSection_id(section_id);                      
+				section.setSection_name(section_name);
+				sectionslist.add(section);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return sectionslist;
+	}
 }

@@ -1,71 +1,178 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="pojo.Subject" %>
-<%@page import="dao.DSubject"%>
-    
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap.css">
     
-    <title>admin Subject</title>
-  </head>
-  <body>
-				<%
-					DSubject dsubject = new DSubject();
-					ArrayList<Subject> subjectslist= dsubject.fetch();
-				%>
-				
-	<div class="custom-breadcrumns border-bottom" style="background-color:  rgb(195, 211, 210); padding:10px; text-align:center" >
-		<div class="container">
-			<a href="index.html">Home</a>|
-			<a href="loginAdmin.html">AdminLogin</a>|
-			<a href="admin.jsp">Admin</a>|
-			<span class="current">Admin Subject</span>
+  <title>Add-Update-Delete</title>
+ 
+</head>
+
+<body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
+
+    <!---------------    header     -------------->
+  
+    <div class="container-fluid bg-info ">
+		<div class="row">
+		  <div class="col text-monospace ">
+			<header class="lead font-weight-bold text-center text-light p-2">
+			  ATTENDANCE MANAGEMENT SYSTEM </header>
+		  </div>
+		</div>
+	  </div>
+  
+  
+	  <!---------------    navigation     -------------->
+  
+	  <div class="container-fluid ">
+		  <div class="row">
+			  <div class="col text-monospace ">
+				  <nav>
+					  <ol class="breadcrumb"
+						  style="background-color: rgb(233, 235, 221);">
+						  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						  <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
+						  <li class="breadcrumb-item"><a href="admin.jsp">Admin</a></li>
+						  <li class="breadcrumb-item active">Add-Update-Delete</li>
+					  </ol>
+				  </nav>
+			  </div>
+		  </div>
+	  </div>
+
+	    <!---------------    main     -------------->
+		<form id="verification" class="container-fluid my-3" >
+			<div class="row justify-content-center">
+				<div class="col-5 border border-primary rounded bg-info">
+					
+					<div class="row bg-primary">
+						<div class="col text-monospace">
+							<header class="text-center font-weight-bold my-3">ADD NEW SUBJECT</header>
+						</div>
+					</div>
+	
+					<div class="row my-2">
+						<div class="col text-light">
+							<label for="subject_name " class="text-reset">Name</label>
+							<input type="text" id="subject_name"
+							placeholder="Name Of The subject" class="form-control" required>
+						</div>	
+					</div>
+			
+					<div class="row my-3">
+						<div class="col text-light">
+							<label for="subject_id" class="text-reset">ID</label>
+							<input type="text" id="subject_id" 
+							placeholder="Enter subject ID" class="form-control" required>
+						</div>
+					</div>
+
+					<div class="row mb-3 mt-5">
+						<div class="col">
+							<input type="submit" value="ADD"
+							class="btn btn-block btn-outline-light">
+						</div>
+					</div>
+					  
+				</div>
+			</div>
+		</form>
+
+<!---------------    RESPONSE     -------------->
+
+		<div class="container my-2">
+			<div class="row justify-content-center">
+				<div class="col-5 bg-warning text-monospace " id="design">
+					<span class="text-center font-weight-bold my-3" id="response"></span>
+				</div>
+			</div>
+		</div>
+<!---------------    update and delete     -------------->
+
+		<div class="container-fluid mt-2">
+			<div class="row justify-content-center">
+				<div class="col-5 bg-primary border border-warning rounded text-monospace">
+					<a href="adminSubjectUpDel.jsp" class="btn btn-block btn-outline-danger font-weight-bold text-reset my-2">UPDATE OR DELETE SUBJECT</a>
+				</div>
+			</div>
+		</div>
+	
+<!---------------    footer     -------------->
+
+<footer  class="container-fluid bg-info">
+	<div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+		<div class="col-5 ">
+			<a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+		</div>
+		<div class="col-4">
+			<span>
+				BY: 
+			</span>
+			<span>
+				<a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+				<a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+				<a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+				<a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+			</span>
 		</div>
 	</div>
-	<h2>welcome admin u can now update insert and delete teachers</h2>
-	<form action="AdminSubject">
-		add subject
-		<div>
-			NAME
-			<input type="text" name="subject_name" required>
-		</div>
-		<div>
-			ID
-			<input type="text" name="subject_id" required>
-		</div>
-		<div>
-			<input type = "submit" value="ADD subject" >
-		</div>
-	</form>
-		<br><br><br>
-		subjects list
-		<!--style="border: solid; border-color: red;"-->
-		<table class="table" >
-			<tr>
-				<th scope="col">subject name</th>
-				<th scope="col">subject id</th>
-				<th scope="col">update</th>
-				<th scope="col">delete</th>
-			</tr>
-				<% 
-					for(Subject s:subjectslist)
-					{
-				%>
-			<tr>
-				<td><%= s.getSubject_name() %></td>
-				<td><%= s.getSubject_id() %></td>
-				<td><button>update</button></td>
-				<td><button>delete</button></td>
-			</tr>
-				<%
-					}
-				%>
-		</table>
-	
+</footer>
 
+<!---------------    script     -------------->
+
+<script>
+	document.getElementById("verification").addEventListener("submit",fire);
+	function fire(e) {
+	if (document.getElementById("subject_id").value== "" || document.getElementById("subject_name").value== "") {
+		//alert("please choose section");   this doesnot stop the execution of program
+		throw alert("please fill out all the fields");
+	}
+	e.preventDefault();
+	//creating url pattern
+	var teacher_name=document.getElementById("subject_name").value;  
+	var teacher_id=document.getElementById("subject_id").value;  
+	var url="AdminSubject?subject_name="+teacher_name+"&subject_id="+teacher_id;
+	console.log(url);
+	
+	
+	//create xhr object
+	var xhr = new XMLHttpRequest();
+	//console.log(xhr);
+	xhr.open('GET',url,true);
+
+	xhr.onload = function () {
+		if (this.status == 200) {
+			var res= this.responseText;
+			document.getElementById("design").classList.add("border");
+			document.getElementById("design").classList.add("border-danger");
+			document.getElementById("design").classList.add("rounded");
+			if(res=="0")
+			   {
+				document.getElementById("response").innerHTML="subject added";
+				}
+			if(res=="1")
+			   {
+				document.getElementById("response").innerHTML="duplicate entry";
+			   }
+			if(res=="2")
+			   {	
+				document.getElementById("response").innerHTML="contact admin, something unexpected occured";
+			   }
+		}
+		else if (this.status == 404) 
+		{
+			document.getElementById("design").classList.add("border");
+			document.getElementById("design").classList.add("border-danger");
+			document.getElementById("design").classList.add("rounded");
+			document.getElementById("response").innerHTML="something went wrong";		
+		} 
+	}
+
+	xhr.send();
+}
+</script>
   </body>
 </html>

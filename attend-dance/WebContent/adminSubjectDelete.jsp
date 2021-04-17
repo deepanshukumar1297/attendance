@@ -14,8 +14,8 @@
 <body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
 
     <%
-        String teacher_id = request.getParameter("teacher_id");
-        String teacher_name = request.getParameter("teacher_name");
+        String subject_id = request.getParameter("subject_id");
+        String subject_name = request.getParameter("subject_name");
 	%>
 	
 
@@ -40,11 +40,11 @@
 					<ol class="breadcrumb"
 						style="background-color: rgb(233, 235, 221);">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						  <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
-						  <li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
-						  <li class="breadcrumb-item"><a href="adminTeacher.html">Add-Update-Delete</a></li>
-						  <li class="breadcrumb-item"><a href="adminTeacherUpDel.jsp">List</a></li>
-						<li class="breadcrumb-item active">delete</li>
+						<li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
+						<li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
+						<li class="breadcrumb-item"><a href="adminSubject.jsp">Add-Update-Delete</a></li>
+                        <li class="breadcrumb-item"><a href="adminSubjectUpDel.jsp">List</a></li>
+						<li class="breadcrumb-item active">Delete</li>
 					</ol>
 				</nav>
 			</div>
@@ -65,17 +65,17 @@
 
                 <div class="row my-3">
                     <div class="col text-light">
-                        <label for="teacher_name " class="text-reset">Name</label>
-                        <input type="text" id="teacher_name"
-                        class="form-control" value="<%=teacher_name%>" required readonly>
+                        <label for="subject_name " class="text-reset">Name</label>
+                        <input type="text" id="subject_name"
+                        class="form-control" value="<%=subject_name%>" required readonly>
                     </div>	
                 </div>
         
                 <div class="row my-3">
                     <div class="col text-light">
-                        <label for="teacher_id" class="text-reset">ID</label>
-                        <input type="text" id="teacher_id" 
-                        class="form-control" value="<%=teacher_id%>" required readonly>
+                        <label for="subject_id" class="text-reset">ID</label>
+                        <input type="text" id="subject_id" 
+                        class="form-control" value="<%=subject_id%>" required readonly>
                     </div>
                 </div>
 
@@ -129,13 +129,13 @@
     <script>
         document.getElementById("delete").addEventListener("submit",fire);
         function fire(e) {
-        if (document.getElementById("teacher_id").value !== "<%= teacher_id %>" || document.getElementById("teacher_name").value !== "<%= teacher_name %>") {
+        if (document.getElementById("subject_id").value !== "<%= subject_id %>" || document.getElementById("subject_name").value !== "<%= subject_name %>") {
             //alert("please choose section");   this doesnot stop the execution of program
             throw alert("you cant update the information while deleting");
         }
         e.preventDefault();
         //creating url pattern
-        var url="AdminTeacherDelete?teacher_id=<%=teacher_id %>";
+        var url="AdminSubjectDelete?subject_id=<%=subject_id %>";
         console.log(url);
        
         //create xhr object

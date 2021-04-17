@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="dao.DSubjectTeacherSection"%>
-<%@page import="pojo.Student"%>
+<%@page import="pojo.Coordinator"%>
+<%@page import="dao.DCoordinator"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,11 +18,8 @@
 
 
 	<%
-        String section_id = request.getParameter("section_id");
-        
-        DSubjectTeacherSection dsubteachsec = new DSubjectTeacherSection();
-        ArrayList<Student> secstudentlist = dsubteachsec.fetchStudent(section_id);     
-
+        DCoordinator dcoordinator = new DCoordinator();
+        ArrayList<Coordinator> coordinator_list = dcoordinator.fetch();     
 	%>
 
 	<!---------------    header     -------------->
@@ -48,8 +45,7 @@
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
 						<li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
 						<li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
-						<li class="breadcrumb-item"><a href="adminStudent.jsp">Add-Update-Delete</a></li>
-						<li class="breadcrumb-item"><a href="adminStudentChooseSection.jsp">Update-Delete</a></li>
+						<li class="breadcrumb-item"><a href="adminCoordinator.jsp">Add-Update-Delete</a></li>
 						<li class="breadcrumb-item active">List</li>
 					</ol>
 				</nav>
@@ -67,8 +63,7 @@
 			<div class="row bg-primary sticky-top">
 				<div class="col text-monospace">
 					<header class="text-center font-weight-bold my-3">
-						section
-						<%= section_id %>
+						all Coordinator
 					</header>
 				</div>
 			</div>
@@ -81,8 +76,8 @@
 
 						<thead>
 							<tr>
-								<th>NAME</th>
-								<th>ID</th>
+								<th>SECTION</th>
+                                <th>COORDINATOR</th>
 								<th>ACTION</th>
 							</tr>
 						</thead>
@@ -90,18 +85,19 @@
 						<tbody>
 
 							<% 
-                                    for(Student s:secstudentlist)
+                                    for(Coordinator s:coordinator_list)
                                     {
                                 %>
 							<tr>
-								<td id="student_id"><%= s.getStudent_id() %></td>
-								<td id="student_name"><%= s.getStudent_name().toUpperCase() %></td>
+								<td><%= s.getCoordinator_sectionId() %></td>
+                                <td><%= s.getCoordinator_teacherId() %></td>
 								<td><a
-									href="adminStudentUpdate.jsp?section_id=<%= section_id %>&student_id=<%= s.getStudent_id() %>&student_name=<%= s.getStudent_name() %>"
+									href="adminCoordinatorUpdate.jsp?section_id=<%= s.getCoordinator_sectionId() %>&teacher_id=<%= s.getCoordinator_teacherId() %>"
 									class="btn btn-sm btn-outline-warning badge rounded-pill">update</a>
                                     <a
-                                    href="adminStudentDelete.jsp?student_id=<%= s.getStudent_id() %>&student_name=<%= s.getStudent_name() %>"
-									class="btn btn-sm btn-outline-danger badge rounded-pill">delete</a>								</td>
+									href="adminCoordinatorDelete.jsp?section_id=<%= s.getCoordinator_sectionId() %>&teacher_id=<%= s.getCoordinator_teacherId() %>"
+									class="btn btn-sm btn-outline-danger badge rounded-pill">delete</a>								
+								</td>
 							</tr>
 
 							<%
@@ -117,15 +113,15 @@
 	</div>
     </main>
     
-	<!---------------    suggestion     -------------->
+<!---------------    suggestion     -------------->
 
-	<div class="container my-2">
-		<div class="row justify-content-center">
-			<div class="col-5 bg-warning text-monospace border border-danger rounded">
-				<span class="text-center font-weight-bold my-3">please reload the page after updation or deletion</span>
-			</div>
+<div class="container my-3">
+	<div class="row justify-content-center">
+		<div class="col-5 bg-warning text-monospace border border-danger rounded">
+			<span class="text-center font-weight-bold my-3">please reload the page after updation or deletion</span>
 		</div>
 	</div>
+</div>
    
 	<!---------------    footer     -------------->
 

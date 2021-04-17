@@ -44,9 +44,9 @@ public class AdminSubject extends HttpServlet {
 					
 		String inserted=dsubject.insert(subject);
 
-		if(inserted.equals("added"))response.sendRedirect("admin.jsp");
-		if(inserted.equals("duplicate entry"))response.sendRedirect("admin.jsp");
-		if(inserted.equals("exception occcured"))response.sendRedirect("admin.jsp");
+		if(inserted.equals("added"))response.getWriter().write("0");
+		if(inserted.equals("duplicate entry"))response.getWriter().write("1");	
+		if(inserted.equals("exception occcured"))response.getWriter().write("2");
 			
 		
 	}

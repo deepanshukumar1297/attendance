@@ -92,4 +92,48 @@ public class DSubject
 		}
 		return subjectslist;
 	}
+
+	public String update(Subject subject, String subject_id) {
+		getCon();
+		String query= "update subject set subject_name=? , subject_id=? where subject_id=?"; 
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			PreparedStatement pst= con.prepareStatement(query);
+			pst.setString(1, subject.getSubject_name());
+			pst.setString(2, subject.getSubject_id());
+			pst.setString(3, subject_id);
+						
+			int i=pst.executeUpdate();
+			if(i>0)return "updated";
+			else return "not updated";
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return "exception occcured";
+		}
+	}
+
+	public String delete(Subject subject) {
+		getCon();
+		String query= "delete from subject where subject_id=?"; 
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			PreparedStatement pst= con.prepareStatement(query);
+			pst.setString(1, subject.getSubject_id());
+							
+			int i=pst.executeUpdate();
+			if(i>0)return "info deleted";
+			else return "can't delete";
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return "exception occcured";
+		}
+	}
 }

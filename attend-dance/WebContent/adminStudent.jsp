@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%><%@ page import="java.util.ArrayList" %>
-<%@ page import="pojo.Student" %>
-<%@ page import="dao.DStudent"%>
+
 <%@ page import="pojo.Section" %>
 <%@ page import="dao.DSection"%>
 
@@ -14,17 +13,15 @@
     content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/bootstrap.css">
     
-  <title>admin</title>
+  <title>Add-Update-Delete</title>
  
 </head>
 
-<body style="background-color: rgb(233, 235, 221);">
+<body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
 
 				<%
-					DStudent dstudent = new DStudent();
 					DSection dsection = new DSection();      //for getting section_id since it is foreign key
 					
-					ArrayList<Student> studentslist= dstudent.fetch();
 					ArrayList<Section> sectionslist= dsection.fetch();
 				%>
 				
@@ -50,8 +47,8 @@
 						  style="background-color: rgb(233, 235, 221);">
 						  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
 						  <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
-						  <li class="breadcrumb-item"><a href="admin.jsp">Admin</a></li>
-						  <li class="breadcrumb-item active">Admin Student</li>
+						  <li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
+						  <li class="breadcrumb-item active">Add-Update-Delete</li>
 					  </ol>
 				  </nav>
 			  </div>
@@ -61,7 +58,7 @@
 	    <!---------------    main     -------------->
 		<form id="verification" class="container-fluid">
 			<div class="row justify-content-center">
-				<div class="col-6 border border-primary rounded bg-info">
+				<div class="col-5 border border-primary rounded bg-info">
 					
 					<div class="row bg-primary">
 						<div class="col text-monospace">
@@ -123,27 +120,34 @@
 		</div>
 <!---------------    update and delete     -------------->
 
-		<div class="container-fluid mt-3">
+		<div class="container-fluid">
 			<div class="row justify-content-center">
-				<div class="col-6 bg-primary border border-primary rounded text-monospace">
-					<a href="adminStudentChooseSection.jsp" class="btn btn-block btn-outline-light my-2">UPDATE OR DELETE STUDENT</a>
+				<div class="col-5 bg-primary border border-warning rounded text-monospace">
+					<a href="adminStudentChooseSection.jsp" class="btn btn-block btn-outline-danger font-weight-bold text-reset my-2">UPDATE OR DELETE STUDENT</a>
 				</div>
 			</div>
 		</div>
 	
 <!---------------    footer     -------------->
 
-<footer  class="container-fluid bg-info mt-5">
-	<div class="row p-3">
-		<div class="col-7 text-monospace">
+<footer  class="container-fluid bg-info">
+	<div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+		<div class="col-5 ">
 			<a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
 		</div>
-		<div class="col-5">
-			<span class="font-weight-bold text-monospace">BY: </span> <span> Darshika | Dev | Gurneet | Deepanshu </span>
+		<div class="col-4">
+			<span>
+				BY: 
+			</span>
+			<span>
+				<a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+				<a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+				<a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+				<a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+			</span>
 		</div>
 	</div>
 </footer>
-
 <!---------------    script     -------------->
 
 <script>

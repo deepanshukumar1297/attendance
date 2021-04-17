@@ -33,29 +33,19 @@ public class AdminCoordinator extends HttpServlet
 
 		response.setContentType("text/html");
 		
-		String coordinator_teacherId=request.getParameter("coordinator_teacherId");
-		String coordinator_sectionId=request.getParameter("coordinator_sectionId");
+		String coordinator_teacherId=request.getParameter("teacher_id");
+		String coordinator_sectionId=request.getParameter("section_id");
 		
 		coordinator.setCoordinator_teacherId(coordinator_teacherId);
 		coordinator.setCoordinator_sectionId(coordinator_sectionId);
 
 		String inserted=dcoordinator.insert(coordinator);
 		
-		if(inserted.equals("added"))
-		{
-			out.print("COORDINATOR IS ADDED");
-			rd.include(request, response);
-		}
-		else if(inserted.equals("duplicate entry"))
-		{
-			out.print("DUPLICATE ENTRY");
-			rd.include(request, response);
-		}
-		else if(inserted.equals("exception occcured"))
-		{
-			out.print("EXCEPTION OCCURED IN SQL");
-			rd.include(request, response);
-		}
+		if(inserted.equals("added")) response.getWriter().write("0");
+		else if(inserted.equals("duplicate entry")) response.getWriter().write("1");
+		else if(inserted.equals("exception occcured")) response.getWriter().write("2");
+		
+		
 	}
 
 }

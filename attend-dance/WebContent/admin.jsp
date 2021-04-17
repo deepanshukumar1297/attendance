@@ -2,60 +2,47 @@
     pageEncoding="utf-8"%>
 <!doctype html>
 <html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="css/bootstrap.css">
-    
-  <title>admin</title>
-  <!-- <style>
-		.container{
-			border: 8px solid rgb(21, 255, 0) ;
-		}
-		.row{
-			border: 8px solid rgb(219, 20, 20) ;
-		}
-		.col,.col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{
-			border: 8px solid rgb(38, 0, 255) ;
-		}
-	</style> -->
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="css/bootstrap.css">    
+	<title>admin.choose</title>
+	
 
-<body style="background-color: rgb(233, 235, 221);">
 
-    <!---------------    header     -------------->
-  
-    <div class="container-fluid bg-info ">
-      <div class="row">
-        <div class="col text-monospace ">
-          <header class="lead font-weight-bold text-center text-light p-2">
-            ATTENDANCE MANAGEMENT SYSTEM </header>
+  </head>
+    <body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
+        
+        <!---------------    header     -------------->
+        
+      <div  class="container-fluid bg-info ">
+          <div class="row align-content-around" style="height: 3rem;">
+              <header class="col text-monospace lead font-weight-bold text-center text-light ">
+                  ATTENDANCE MANAGEMENT SYSTEM
+              </header>
+          </div>
+      </div>
+
+
+	        <!---------------    navigation     -------------->
+
+      <div class="container-fluid ">
+        <div class="row">
+          <div class="col text-monospace ">
+            <nav>
+              <ol class="breadcrumb"
+                style="background-color: rgb(233, 235, 221);">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
+                <li class="breadcrumb-item active">Choose</li>
+              </ol>
+            </nav>
+          </div>
         </div>
       </div>
-    </div>
-
-
-	<!---------------    navigation     -------------->
-
-	<div class="container-fluid ">
-		<div class="row">
-			<div class="col text-monospace ">
-				<nav>
-					<ol class="breadcrumb"
-						style="background-color: rgb(233, 235, 221);">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
-						<li class="breadcrumb-item active">Admin</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-	</div>
 
     <!---------------    main     -------------->
-  <div class="container-fluid mt-3">
+  <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-5 border border-primary rounded bg-info">
 
@@ -67,25 +54,25 @@
 
         <div class="row mt-3">
           <div class="col">
-            <a href="adminStudent.jsp" class="btn btn-block btn-outline-light my-2">Manage Student</a>
+            <a href="adminStudent.jsp" class="btn btn-block btn-outline-light my-3">Manage Student</a>
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-            <a href="adminTeacher.html" class="btn btn-block btn-outline-light my-2">Manage Teacher</a>
+            <a href="adminTeacher.html" class="btn btn-block btn-outline-light my-3">Manage Teacher</a>
           </div>
         </div>
         
         <div class="row">
           <div class="col">
-            <a href="adminCoordinator.jsp" class="btn btn-block btn-outline-light my-2">Manage Coordinator</a>
+            <a href="adminCoordinator.jsp" class="btn btn-block btn-outline-light my-3">Manage Coordinator</a>
           </div>
         </div>
         
         <div class="row">
           <div class="col">
-            <a href="adminSubject.jsp" class="btn btn-block btn-outline-light my-2">Manage Subject</a>
+            <a href="adminSubject.jsp" class="btn btn-block btn-outline-light my-3">Manage Subject</a>
           </div>
         </div>
         
@@ -100,15 +87,23 @@
   </div>
 		
     <!---------------    footer     -------------->
-    <footer class="container-fluid bg-info mt-5">
-      <div class="row p-3">
-        <div class="col-7 text-monospace">
-          <a href="https://www.medicaps.ac.in" class="text-reset">MEDICAPS-UNIVERSITY</a>
-        </div>
-        <div class="col-5">
-          <span class="font-weight-bold text-monospace">BY: </span> <span> Darshika | Dev | Gurneet | Deepanshu </span>
-        </div>
+    <footer  class="container-fluid bg-info">
+      <div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+          <div class="col-5 ">
+              <a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+          </div>
+          <div class="col-4">
+              <span>
+                  BY: 
+              </span>
+              <span>
+                  <a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+                  <a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+                  <a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+                  <a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+              </span>
+          </div>
       </div>
-    </footer>
+  </footer>
   </body>
 </html>

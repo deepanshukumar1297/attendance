@@ -191,6 +191,50 @@ public class DCoordinator
 			return "exception occcured";
 		}	
 	}
+
+	public String delete(Coordinator coordinator) {
+		getCon();
+		String query= "delete from coordinator where section_id=?"; 
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			PreparedStatement pst= con.prepareStatement(query);
+			pst.setString(1, coordinator.getCoordinator_sectionId());
+					
+			int i=pst.executeUpdate();
+			if(i>0)return "info deleted";
+			else return "can't delete";
+		}
+		
+		catch(SQLException e)
+		{
+			//e.printStackTrace();
+			return "exception occcured";
+		}
+	}
+
+	public String update(Coordinator coordinator)
+	{
+		getCon();
+		String query= "update coordinator set teacher_id=? where section_id=?"; 
+		try
+		{
+			Connection con=DriverManager.getConnection(url, uname, pass);
+			PreparedStatement pst= con.prepareStatement(query);
+			pst.setString(1, coordinator.getCoordinator_teacherId());
+			pst.setString(2, coordinator.getCoordinator_sectionId());
+						
+			int i=pst.executeUpdate();
+			if(i>0)return "updated";
+			else return "not updated";
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return "exception occcured";
+		}
+	}
 }
 
 

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ page import="java.util.ArrayList"%>
-<%@page import="pojo.Student"%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,10 +9,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="css/bootstrap.css">
 
-<title>HOME</title>
+<title>update</title>
 
 </head>
-<body style="background-color: rgb(233, 235, 221);">
+<body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
 
     <%
         String section_id = request.getParameter("section_id");
@@ -25,12 +24,11 @@
 
 	<!---------------    header     -------------->
 
-	<div class="container-fluid bg-info ">
-		<div class="row">
-			<div class="col text-monospace ">
-				<header class="lead font-weight-bold text-center text-light p-2">
-					ATTENDANCE MANAGEMENT SYSTEM </header>
-			</div>
+	<div  class="container-fluid bg-info ">
+		<div class="row align-content-around" style="height: 3rem;">
+			<header class="col text-monospace lead font-weight-bold text-center text-light ">
+				ATTENDANCE MANAGEMENT SYSTEM
+			</header>
 		</div>
 	</div>
 
@@ -44,12 +42,11 @@
 					<ol class="breadcrumb"
 						style="background-color: rgb(233, 235, 221);">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin
-								Login</a></li>
-						<li class="breadcrumb-item"><a href="admin.jsp">Admin</a></li>
-						<li class="breadcrumb-item"><a href="adminStudent.jsp">Admin
-								Student</a></li>
-						<li class="breadcrumb-item active">Admin Student-section</li>
+						<li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
+						<li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
+						<li class="breadcrumb-item"><a href="adminStudent.jsp">Add-Update-Delete</a></li>
+						<li class="breadcrumb-item"><a href="adminStudentChooseSection.jsp">Update-Delete</a></li>
+						<li class="breadcrumb-item active">Update</li>
 					</ol>
 				</nav>
 			</div>
@@ -84,10 +81,10 @@
                     </div>
                 </div>
 
-                <div class="row my-5">
+                <div class="row my-4">
                     <div class="col">
                         <input type="submit" value="UPDATE" id="submit_botton"
-                        class="btn btn-block btn-outline-warning">
+                        class="btn btn-block btn-outline-warning font-weight-bold">
                     </div>
                 </div>
 
@@ -109,16 +106,23 @@
 
 	<!---------------    footer     -------------->
 
-	<footer class="container-fluid bg-info mt-5">
-		<div class="row p-3">
-			<div class="col-7 text-monospace">
-				<a href="https://www.medicaps.ac.in" class="text-reset">MEDICAPS-UNIVERSITY</a>
-			</div>
-			<div class="col-5">
-				<span class="font-weight-bold text-monospace">BY: </span> <span>
-					Darshika | Dev | Gurneet | Deepanshu </span>
-			</div>
-		</div>
+	<footer  class="container-fluid bg-info">
+        <div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+            <div class="col-5 ">
+                <a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+            </div>
+            <div class="col-4">
+                <span>
+                    BY: 
+                </span>
+                <span>
+                    <a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+                    <a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+                    <a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+                    <a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+                </span>
+            </div>
+        </div>
     </footer>
     
 

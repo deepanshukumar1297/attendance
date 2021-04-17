@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,25 +9,25 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="css/bootstrap.css">
 
-<title>delete</title>
+<title>update</title>
 
 </head>
 <body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
 
     <%
-        String teacher_id = request.getParameter("teacher_id");
-        String teacher_name = request.getParameter("teacher_name");
+        String subject_id = request.getParameter("subject_id");
+        String subject_name = request.getParameter("subject_name");
+        
 	%>
 	
 
 	<!---------------    header     -------------->
 
-	<div class="container-fluid bg-info ">
-		<div class="row">
-		  <div class="col text-monospace ">
-			<header class="lead font-weight-bold text-center text-light p-2">
-			  ATTENDANCE MANAGEMENT SYSTEM </header>
-		  </div>
+	<div  class="container-fluid bg-info ">
+		<div class="row align-content-around" style="height: 3rem;">
+			<header class="col text-monospace lead font-weight-bold text-center text-light ">
+				ATTENDANCE MANAGEMENT SYSTEM
+			</header>
 		</div>
 	</div>
 
@@ -40,11 +41,11 @@
 					<ol class="breadcrumb"
 						style="background-color: rgb(233, 235, 221);">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						  <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
-						  <li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
-						  <li class="breadcrumb-item"><a href="adminTeacher.html">Add-Update-Delete</a></li>
-						  <li class="breadcrumb-item"><a href="adminTeacherUpDel.jsp">List</a></li>
-						<li class="breadcrumb-item active">delete</li>
+						<li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
+						<li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
+						<li class="breadcrumb-item"><a href="adminSubject.jsp">Add-Update-Delete</a></li>
+                        <li class="breadcrumb-item"><a href="adminSubjectUpDel.jsp">List</a></li>
+						<li class="breadcrumb-item active">Update</li>
 					</ol>
 				</nav>
 			</div>
@@ -53,36 +54,36 @@
 
 	<!---------------    main     -------------->
 
-	<form class="container mt-3" id="delete">
+	<form class="container mt-3" id="update">
         <div class="row justify-content-center">
             <div class="col-6 border border-primary rounded bg-info">
 
                 <div class="row bg-primary">
                     <div class="col text-monospace">
-                        <header class="text-center font-weight-bold my-3">DELETE INFORMATION</header>
+                        <header class="text-center font-weight-bold my-3">update information</header>
                     </div>
                 </div>
 
                 <div class="row my-3">
                     <div class="col text-light">
-                        <label for="teacher_name " class="text-reset">Name</label>
-                        <input type="text" id="teacher_name"
-                        class="form-control" value="<%=teacher_name%>" required readonly>
+                        <label for="subject_name " class="text-reset">Name</label>
+                        <input type="text" id="subject_name"
+                        placeholder="Name Of The Subject" class="form-control" value="<%=subject_name%>" required>
                     </div>	
                 </div>
         
                 <div class="row my-3">
                     <div class="col text-light">
-                        <label for="teacher_id" class="text-reset">ID</label>
-                        <input type="text" id="teacher_id" 
-                        class="form-control" value="<%=teacher_id%>" required readonly>
+                        <label for="subject_id" class="text-reset">ID</label>
+                        <input type="text" id="new_subject_id" 
+                        placeholder="Enter Subject ID" class="form-control" value="<%=subject_id%>" required>
                     </div>
                 </div>
 
                 <div class="row my-4">
                     <div class="col">
-                        <input type="submit" value="DELETE" id="submit_botton"
-                        class="btn btn-block btn-outline-danger font-weight-bold">
+                        <input type="submit" value="UPDATE" id="submit_botton"
+                        class="btn btn-block btn-outline-warning font-weight-bold">
                     </div>
                 </div>
 
@@ -105,38 +106,39 @@
 	<!---------------    footer     -------------->
 
 	<footer  class="container-fluid bg-info">
-		<div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
-			<div class="col-5 ">
-				<a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
-			</div>
-			<div class="col-4">
-				<span>
-					BY: 
-				</span>
-				<span>
-					<a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
-					<a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
-					<a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
-					<a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
-				</span>
-			</div>
-		</div>
-	</footer>
+        <div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+            <div class="col-5 ">
+                <a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+            </div>
+            <div class="col-4">
+                <span>
+                    BY: 
+                </span>
+                <span>
+                    <a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+                    <a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+                    <a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+                    <a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+                </span>
+            </div>
+        </div>
+    </footer>
     
 
     <!-----------    script     --------------->
 
     <script>
-        document.getElementById("delete").addEventListener("submit",fire);
+        document.getElementById("update").addEventListener("submit",fire);
         function fire(e) {
-        if (document.getElementById("teacher_id").value !== "<%= teacher_id %>" || document.getElementById("teacher_name").value !== "<%= teacher_name %>") {
+        if (document.getElementById("new_subject_id").value == "" || document.getElementById("subject_name").value== "") {
             //alert("please choose section");   this doesnot stop the execution of program
-            throw alert("you cant update the information while deleting");
+            throw alert("please fill out all the fields");
         }
         e.preventDefault();
         //creating url pattern
-        var url="AdminTeacherDelete?teacher_id=<%=teacher_id %>";
-        console.log(url);
+        var subject_name=document.getElementById("subject_name").value;  
+        var new_subject_id=document.getElementById("new_subject_id").value;  
+        var url="AdminSubjectUpdate?subject_name="+subject_name+"&new_subject_id="+new_subject_id+"&subject_id=<%=subject_id %>";
        
         //create xhr object
         var xhr = new XMLHttpRequest();
@@ -151,15 +153,16 @@
                 document.getElementById("design").classList.add("rounded");
                 if(res=="0")
                    {
-                    document.getElementById("response").innerHTML="deleted";
-                    document.getElementById("teacher_name").value="";
-                    document.getElementById("teacher_id").value="";
-                    document.getElementById("teacher_id").value="";
+                    document.getElementById("response").innerHTML="updated";
+                    document.getElementById("student_name").value="";
+                    document.getElementById("new_student_id").value="";
+                    document.getElementById('student_name').readOnly = true;
+                    document.getElementById('new_student_id').readOnly = true; 
                     document.getElementById("submit_botton").disabled= true;
                     }
                 if(res=="1")
                    {
-                    document.getElementById("response").innerHTML="can't delete";
+                    document.getElementById("response").innerHTML="can't update";
                    }
                 if(res=="2")
                    {	

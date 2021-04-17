@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="dao.DSubjectTeacherSection"%>
-<%@page import="pojo.Student"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="pojo.Subject" %>
+<%@page import="dao.DSubject"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,19 +11,16 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="css/bootstrap.css">
 
-<title>list</title>
+<title>List</title>
 
 </head>
 <body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
 
 
 	<%
-        String section_id = request.getParameter("section_id");
-        
-        DSubjectTeacherSection dsubteachsec = new DSubjectTeacherSection();
-        ArrayList<Student> secstudentlist = dsubteachsec.fetchStudent(section_id);     
-
-	%>
+        DSubject dsubject = new DSubject();
+        ArrayList<Subject> subjectslist= dsubject.fetch();
+    %>
 
 	<!---------------    header     -------------->
 
@@ -46,10 +43,9 @@
 					<ol class="breadcrumb"
 						style="background-color: rgb(233, 235, 221);">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
-						<li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
-						<li class="breadcrumb-item"><a href="adminStudent.jsp">Add-Update-Delete</a></li>
-						<li class="breadcrumb-item"><a href="adminStudentChooseSection.jsp">Update-Delete</a></li>
+						  <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
+						  <li class="breadcrumb-item"><a href="admin.jsp">Admin</a></li>
+						<li class="breadcrumb-item"><a href="adminSubject.jsp">Add-Update-Delete</a></li>
 						<li class="breadcrumb-item active">List</li>
 					</ol>
 				</nav>
@@ -67,8 +63,7 @@
 			<div class="row bg-primary sticky-top">
 				<div class="col text-monospace">
 					<header class="text-center font-weight-bold my-3">
-						section
-						<%= section_id %>
+						LIST OF SUBJECTS
 					</header>
 				</div>
 			</div>
@@ -89,19 +84,20 @@
 
 						<tbody>
 
-							<% 
-                                    for(Student s:secstudentlist)
+                                <% 
+                                    for(Subject t:subjectslist)
                                     {
                                 %>
 							<tr>
-								<td id="student_id"><%= s.getStudent_id() %></td>
-								<td id="student_name"><%= s.getStudent_name().toUpperCase() %></td>
+								<td id="subject_name"><%= t.getSubject_name().toUpperCase() %></td>
+								<td id="subject_id"><%= t.getSubject_id().toUpperCase() %></td>
 								<td><a
-									href="adminStudentUpdate.jsp?section_id=<%= section_id %>&student_id=<%= s.getStudent_id() %>&student_name=<%= s.getStudent_name() %>"
+									href="adminSubjectUpdate.jsp?subject_id=<%= t.getSubject_id() %>&subject_name=<%= t.getSubject_name() %>"
 									class="btn btn-sm btn-outline-warning badge rounded-pill">update</a>
                                     <a
-                                    href="adminStudentDelete.jsp?student_id=<%= s.getStudent_id() %>&student_name=<%= s.getStudent_name() %>"
-									class="btn btn-sm btn-outline-danger badge rounded-pill">delete</a>								</td>
+                                    href="adminSubjectDelete.jsp?subject_id=<%= t.getSubject_id() %>&subject_name=<%= t.getSubject_name() %>"
+                                    class="btn btn-sm btn-outline-danger badge rounded-pill">delete</a>								
+                                </td>
 							</tr>
 
 							<%
