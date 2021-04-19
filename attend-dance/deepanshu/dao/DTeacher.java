@@ -100,10 +100,10 @@ public class DTeacher
 	}
 
 	/**
-	 * if countlogin = 1 -> coordinator is first time user and he should change password
+	 * for identifying the first time user or whose password is [password]
 	 * 
 	 * @param teacher_id
-	 * @return -1 or number of times coordinator has logged in
+	 * @return password
 	 */
 	public String getPasswordVerification(String teacher_id)
 	{
@@ -133,20 +133,19 @@ public class DTeacher
 	 * @param teacher_id
 	 * @return status of correct password entered
 	 */
-	public String passValidation(String teacher_password, String teacher_id)
+	public String passValidation(Teacher teacher)
 	{
-		getCon();		
+		getCon();
+		String query1= String.format("select teacher_password from teacher where teacher_id=('%s')",teacher.getTeacher_id());
+		//System.out.println(query1);
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			Statement st= con.createStatement();
-			
-			String query1= String.format("select teacher_password from teacher where teacher_id=('%s')",teacher_id ) ;    
 			ResultSet rs=st.executeQuery(query1);
 			rs.next();
-			String password= rs.getString("teacher_password");
-			
-			if(password.equals(teacher_password)) return "correct password";
+						
+			if(rs.getString(1).equals(teacher.getTeacher_password())) return "correct password";
 			else return "incorrect password";
 		}
 		
@@ -163,18 +162,19 @@ public class DTeacher
 	 * @param teacher_id
 	 * @return status of password changed
 	 */
-	public String updatePassword(String teacher_password, String teacher_id)
+	public String updatePassword(Teacher teacher,String teacher_newPassword)
 	{
-		getCon();		
+		getCon();	
+		String query= String.format("update teacher set teacher_password=('%s') where teacher_id=('%s')", teacher_newPassword, teacher.getTeacher_id());
 		try
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
-			Statement st= con.createStatement();
+			PreparedStatement pst= con.prepareStatement(query);
+			  
+			int i=pst.executeUpdate();																				
 			
-			String query1= String.format("update teacher set teacher_password=('%s') where teacher_id=('%s')", teacher_password, teacher_id) ;    
-			st.executeUpdate(query1);
-			
-			return "password changed";
+			if(i>0)return "updated";
+			else return "not updated";
 		}
 		
 		catch(SQLException e)

@@ -11,7 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="css/bootstrap.css">
 
-<title>list</title>
+<title>Students </title>
 
 </head>
 <body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
@@ -46,11 +46,9 @@
 					<ol class="breadcrumb"
 						style="background-color: rgb(233, 235, 221);">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
-						<li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
-						<li class="breadcrumb-item"><a href="adminStudent.jsp">Add-Update-Delete</a></li>
-						<li class="breadcrumb-item"><a href="adminStudentChooseSection.jsp">Update-Delete</a></li>
-						<li class="breadcrumb-item active">List</li>
+						<li class="breadcrumb-item"><a href="loginCoordinator.jsp">Coordinator Login</a></li>
+                        <li class="breadcrumb-item"><a href="coordinator.jsp">Coordinator</a></li>
+						<li class="breadcrumb-item active"><%= section_id.toUpperCase() %></li>
 					</ol>
 				</nav>
 			</div>
@@ -83,7 +81,6 @@
 							<tr>
 								<th>NAME</th>
 								<th>ID</th>
-								<th>ACTION</th>
 							</tr>
 						</thead>
 
@@ -96,12 +93,6 @@
 							<tr>
 								<td><%= s.getStudent_id() %></td>
 								<td><%= s.getStudent_name().toUpperCase() %></td>
-								<td><a
-									href="adminStudentUpdate.jsp?section_id=<%= section_id %>&student_id=<%= s.getStudent_id() %>&student_name=<%= s.getStudent_name() %>"
-									class="btn btn-sm btn-outline-warning badge rounded-pill">update</a>
-                                    <a
-                                    href="adminStudentDelete.jsp?student_id=<%= s.getStudent_id() %>&student_name=<%= s.getStudent_name() %>"
-									class="btn btn-sm btn-outline-danger badge rounded-pill">delete</a>								</td>
 							</tr>
 
 							<%
@@ -116,16 +107,6 @@
 		</div>
 	</div>
     </main>
-    
-	<!---------------    suggestion     -------------->
-
-	<div class="container my-2">
-		<div class="row justify-content-center">
-			<div class="col-5 bg-warning text-monospace border border-danger rounded">
-				<span class="text-center font-weight-bold my-3">please reload the page after updation or deletion</span>
-			</div>
-		</div>
-	</div>
    
 	<!---------------    footer     -------------->
 

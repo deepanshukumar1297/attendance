@@ -1,18 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+	
 <%@ page import="pojo.SubjectTeacherSection"%>
 <%@ page import="pojo.Student"%>
 <%@ page import="dao.DSubjectTeacherSection"%>
 <%@ page import="java.util.ArrayList"%>
 
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.css"><title>mark attendance</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="css/bootstrap.css">
+
+
+<title>Teacher</title>
+
 </head>
-<body onload="getDate()">
+<body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;" onload="getDate()">
+
 	<%
 		String teacher_id = (String) session.getAttribute("teacher_id");
 		
@@ -20,61 +28,150 @@
 		String subject_id = request.getParameter("subject_id");
 
 		DSubjectTeacherSection dsubteachsec = new DSubjectTeacherSection();
-		ArrayList<Student> secstudent_list = dsubteachsec.fetchStudent(section_id);  
+		ArrayList<Student> secstudent_list = dsubteachsec.fetchStudent(section_id); 
+			
+		String teacher_name = dsubteachsec.teacherInfo(teacher_id);
+
 	%>
-	<form action="MarkAttendance" onsubmit="markAttendance()">
+	<!---------------    header     -------------->
 
-		<div>
-			subject id--><input type="text" name="subject_id" value=<%=subject_id%> readonly>
+	<div  class="container-fluid bg-info ">
+		<div class="row align-content-around" style="height: 3rem;">
+			<header class="col text-monospace lead font-weight-bold text-center text-light ">
+				ATTENDANCE MANAGEMENT SYSTEM
+			</header>
 		</div>
-		<br>
-		<div>
-			section id--><input type="text" name="section_id" value=<%=section_id%> readonly>
-		</div>
-		<br>
-		<div>
-			teacher id--><input type="text" name="teacher_id" value=<%=teacher_id%> readonly>
-		</div>
-		<br>
-		<div>
-			Date--> <input type="date" name="date_of_attendance" id="date_of_attendance">
-		</div>
-		<div>
-			<input type="hidden" name="number_of_students" id="number_of_students" >
-		</div>
-		<br>
-		<br>
+	</div>
 
-		<div>
-			mark all as present <input type="checkbox" id="selectAll"
-				onclick="markAll()">
-		</div>
-		<br>
-		<hr />
+	<!---------------    navigation     -------------->
 
-		<table style="border: solid; border-color: brown;">
-			<tr>
-				<th>student name</th>
-				<th>student id</th>
-				<th>select present</th>
-			</tr>
-			<%
-				for (Student s : secstudent_list) {
-					int i = 1;
-			%>
-			<tr>
-				<td><input type="text" value="<%=s.getStudent_name()%>" readonly></td>
-				<td><input type="text" value="<%=s.getStudent_id()%>" name="student_id" readonly></td>
-				<td><input type="checkbox" onclick="checkMarkAll()" name="attendance" ></td>
-			</tr>
-			<%
-				}
-			%>
-		</table>
-		<input type="submit" value="mark attendance">
+	<div class="container-fluid ">
+		<div class="row">
+
+			<div class="col-10 text-monospace ">
+				<nav>
+					<ol class="breadcrumb"
+						style="background-color: rgb(233, 235, 221);">
+						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item"><a href="loginTeacher.jsp">Teacher Login</a></li>
+						<li class="breadcrumb-item"><a href="teacher.jsp">Teacher</a></li>
+						<li class="breadcrumb-item active">Mark Attendance</li>
+					</ol>
+				</nav>
+			</div>
+
+			<div class="col-2">
+				<a class="btn btn-primary" href="changePassword.jsp?teacher_id=<%= teacher_id %>" role="button">change password</a>
+			</div>
+		</div>
+	</div>
+
+    <!---------------    main     -------------->
+	<form class="container-fluid mb-3"  action="MarkAttendance" onsubmit="markAttendance()">
+		<div class="row text-center align-content-center " style="height: 2rem;">
+
+			<div class="col-12">
+				<h5 class="">
+					<span class="border border-dark rounded bg-secondary text-light m-2"><%= teacher_name.toUpperCase() %>  (ID=<%= teacher_id.toUpperCase() %>)</span>
+					<span class="border border-dark rounded bg-secondary text-light m-2">subject id= <%= subject_id.toUpperCase() %></span>
+					<span class="border border-dark rounded bg-secondary text-light m-2">section id=<%= section_id.toUpperCase() %></span>
+				</h5>
+			</div>
+
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-7 border border-dark rounded bg-secondary overflow-auto" style="height: 70vh;">
+
+				<div class="row bg-dark sticky-top">
+					<div class="col text-monospace">
+						<header class="text-center text-light font-weight-bold my-3">
+							MARK ATTENDANCE
+						</header>
+					</div>
+				</div>
+	
+				<div class="form-group row form-inline justify-content-around">
+					<div class="form-inline">
+						<label for="date_of_attendance" class="col-form-label text-light">Choose Date</label>
+						<input class="form-control" type="date" name="date_of_attendance" id="date_of_attendance">
+					</div>
+					<div class="form-check">
+						<input class="form-check-input " type="checkbox" id="selectAll" onclick="markAll()">
+						<label class="form-check-label text-light" for="selectAll">
+						  Mark all as present
+						</label>
+					</div>
+					<div>
+						<input type="submit" value="mark attendance"
+						class="btn  btn-outline-light">
+					</div>
+				</div>
+
+				<div class="row my-3">
+					<div class="col table-responsive">
+						<table
+							class="table  table-sm table-dark table-bordered table-hover">
+	
+							<thead>
+								<tr>
+									<th>student name</th>
+									<th>student id</th>
+									<th>tick for present</th>
+								</tr>
+							</thead>
+	
+							<tbody>
+								<%
+								for (Student s : secstudent_list) {
+									int i = 1;
+								%>
+								<tr>
+									<td><%=s.getStudent_name()%></td>
+									<td><%=s.getStudent_id()%></td>
+									<td><input type="checkbox" onclick="checkMarkAll()" name="attendance"></td>
+								</tr>
+								<%
+									}
+								%>
+							</tbody>
+	
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
 	</form>
-</body>
-<script>
+
+	
+    <!---------------    footer     -------------->
+	<footer  class="container-fluid bg-info ">
+		<div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+			<div class="col-5 ">
+				<a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+			</div>
+			<div class="col-4">
+				<span>
+					BY: 
+				</span>
+				<span>
+					<a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+					<a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+					<a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+					<a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+				</span>
+			</div>
+		</div>
+	</footer>
+
+	
+	
+  </body>
+
+
+  <script>
 	
 	function markAll() {
 		var nodelist = document.getElementsByName("attendance"); // returns nodelist object
@@ -105,8 +202,6 @@
 	
 	function markAttendance() {
 		var nodelist = document.getElementsByName("attendance");
-		var number_of_students = nodelist.length;
-		document.getElementById("number_of_students").value = number_of_students;
 
 		for (let index = 0; index < nodelist.length; index++) {
 			if (nodelist[index].checked == true)
@@ -128,4 +223,5 @@
 		document.getElementById("date_of_attendance").defaultValue= today;
 	}
 </script>
+
 </html>

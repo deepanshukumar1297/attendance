@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DCoordinator;
+import dao.DTeacher;
+import pojo.Teacher;
 
 
 @WebServlet("/LoginCoordinator")
@@ -26,20 +28,27 @@ public class LoginCoordinator extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		DCoordinator dcoordinator = new DCoordinator();
+		DTeacher dteacher = new DTeacher();
+		Teacher teacher = new Teacher();
 		
 		String coordinator_sectionId = request.getParameter("coordiantor_sectionId");									//section id
-		String coordinator_teacherPassword = request.getParameter("password");
+		String teacher_password = request.getParameter("password");
 		
 		HttpSession session=request.getSession();  
-        session.setAttribute("coordiantor_teacherPassword",coordinator_teacherPassword);									 //session to pass the password so the that first time user can change it
-        session.setAttribute("coordiantor_sectionId",coordinator_sectionId);											 //session for section
-                 
-		if(coordinator_teacherPassword.equals("password"))                                                           //first time user
+        //session.setAttribute("coordiantor_teacherPassword",coordinator_teacherPassword);						//session to pass the password so the that first time user can change it
+        session.setAttribute("coordiantor_sectionId",coordinator_sectionId);									//session for section
+           
+        String teacher_id=dcoordinator.getId(coordinator_sectionId);     //make sure these section id must have coordinators
+        
+        teacher.setTeacher_id(teacher_id);
+        teacher.setTeacher_password(teacher_password);
+        
+		if(teacher_password.equals("password"))          //first time user
 		{
-	        String password=dcoordinator.getPasswordVerification(coordinator_sectionId);
+	        String password=dteacher.getPasswordVerification(teacher_id);
 	        if(password.equals("*"))
 			{
-				RequestDispatcher rd=request.getRequestDispatcher("chngPassCoordinator.html");
+				RequestDispatcher rd=request.getRequestDispatcher("changePassword.jsp?teacher_id="+teacher_id);
 				rd.forward(request, response);
 			}
 			else if(password.equals("password"))
@@ -52,7 +61,7 @@ public class LoginCoordinator extends HttpServlet {
 		}
 		else 															                                                                //regular user
 		{
-			String validation=dcoordinator.passValidation(coordinator_teacherPassword,coordinator_sectionId);
+			String validation=dteacher.passValidation(teacher);
 			if(validation.equals("correct password"))
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("coordinator.jsp");

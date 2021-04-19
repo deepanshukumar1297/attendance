@@ -1,9 +1,7 @@
 package admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,9 +28,6 @@ public class AdminSubject extends HttpServlet {
     Subject subject = new Subject();
     
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		RequestDispatcher rd=request.getRequestDispatcher("adminSubject.jsp");
-		PrintWriter out = response.getWriter();
 		
 		response.setContentType("text/html");
 		

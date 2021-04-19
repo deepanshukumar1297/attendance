@@ -100,6 +100,7 @@ public class DSubject
 		{
 			Connection con=DriverManager.getConnection(url, uname, pass);
 			PreparedStatement pst= con.prepareStatement(query);
+			
 			pst.setString(1, subject.getSubject_name());
 			pst.setString(2, subject.getSubject_id());
 			pst.setString(3, subject_id);

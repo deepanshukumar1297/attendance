@@ -1,88 +1,178 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="pojo.Section" %>
-<%@page import="dao.DSection"%>
-
-
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap.css">
+    
+  <title>Add-Update-Delete</title>
+ 
+</head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
 
-    <title>admin Section</title>
-  </head>
-  <body>
-				<%
-					DSection dteacher = new DSection();
-					ArrayList<Section> sectionslist= dteacher.fetch();
-				%>
+    <!---------------    header     -------------->
+  
+    <div class="container-fluid bg-info ">
+		<div class="row">
+		  <div class="col text-monospace ">
+			<header class="lead font-weight-bold text-center text-light p-2">
+			  ATTENDANCE MANAGEMENT SYSTEM </header>
+		  </div>
+		</div>
+	  </div>
+  
+  
+	  <!---------------    navigation     -------------->
+  
+	  <div class="container-fluid ">
+		  <div class="row">
+			  <div class="col text-monospace ">
+				  <nav>
+					  <ol class="breadcrumb"
+						  style="background-color: rgb(233, 235, 221);">
+						  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						  <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
+						  <li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
+						  <li class="breadcrumb-item active">Add-Update-Delete</li>
+					  </ol>
+				  </nav>
+			  </div>
+		  </div>
+	  </div>
+
+	    <!---------------    main     -------------->
+		<form id="verification" class="container-fluid my-3" >
+			<div class="row justify-content-center">
+				<div class="col-5 border border-primary rounded bg-info">
+					
+					<div class="row bg-primary">
+						<div class="col text-monospace">
+							<header class="text-center font-weight-bold my-3">ADD NEW SUBJECT</header>
+						</div>
+					</div>
 	
-	<div class="custom-breadcrumns border-bottom" style="background-color:  rgb(195, 211, 210); padding:10px; text-align:center" >
-		<div class="container">
-			<a href="index.html">Home</a>|
-			<a href="loginAdmin.html">AdminLogin</a>|
-			<a href="admin.jsp">Admin</a>|
-			<span class="current">Admin Section</span>
+					<div class="row my-2">
+						<div class="col text-light">
+							<label for="section_name " class="text-reset">Name</label>
+							<input type="text" id="section_name"
+							placeholder="Name Of The section" class="form-control" required>
+						</div>	
+					</div>
+			
+					<div class="row my-3">
+						<div class="col text-light">
+							<label for="section_id" class="text-reset">ID</label>
+							<input type="text" id="section_id" 
+							placeholder="Enter section ID" class="form-control" required>
+						</div>
+					</div>
+
+					<div class="row mb-3 mt-5">
+						<div class="col">
+							<input type="submit" value="ADD"
+							class="btn btn-block btn-outline-light">
+						</div>
+					</div>
+					  
+				</div>
+			</div>
+		</form>
+
+<!---------------    RESPONSE     -------------->
+
+		<div class="container my-2">
+			<div class="row justify-content-center">
+				<div class="col-5 bg-warning text-monospace " id="design">
+					<span class="text-center font-weight-bold my-3" id="response"></span>
+				</div>
+			</div>
+		</div>
+<!---------------    update and delete     -------------->
+
+		<div class="container-fluid mt-2">
+			<div class="row justify-content-center">
+				<div class="col-5 bg-primary border border-warning rounded text-monospace">
+					<a href="adminSectionUpDel.jsp" class="btn btn-block btn-outline-danger font-weight-bold text-reset my-2">UPDATE OR DELETE SECTION</a>
+				</div>
+			</div>
+		</div>
+	
+<!---------------    footer     -------------->
+
+<footer  class="container-fluid bg-info">
+	<div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+		<div class="col-5 ">
+			<a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+		</div>
+		<div class="col-4">
+			<span>
+				BY: 
+			</span>
+			<span>
+				<a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+				<a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+				<a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+				<a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+			</span>
 		</div>
 	</div>
-				
-	<h2>welcome admin u can now update insert and delete teachers</h2>
-	<form action="AdminSection">
-		<h3>add section</h3>
-		<div>
-		section name
-			<input type="text" name="section_name" required>
-		</div>
-		<div>
-		section id
-			<input type="text" name="section_id" required>
-		</div>
-		<div>
-			<input type = "submit" value="ADD section">
-		</div>
-		<br>
-	</form>
-	<br>
+</footer>
 
-	<!-- list of sections -->
+<!---------------    script     -------------->
+
+<script>
+	document.getElementById("verification").addEventListener("submit",fire);
+	function fire(e) {
+	if (document.getElementById("section_id").value== "" || document.getElementById("section_name").value== "") {
+		//alert("please choose section");   this doesnot stop the execution of program
+		throw alert("please fill out all the fields");
+	}
+	e.preventDefault();
+	//creating url pattern
+	var section_name=document.getElementById("section_name").value;  
+	var section_id=document.getElementById("section_id").value;  
+	var url="AdminSection?section_name="+section_name+"&section_id="+section_id;
+	console.log(url);
 	
-	section list
-		<table style="border: solid; border-color: red;">
-			<tr>
-				<th>section</th>
-				<th>id</th>
-				<th>update</th>
-				<th>delete</th>
-			</tr>
-				<% 
-					for(Section s:sectionslist)
-					{
-				%>
-			<tr>
-				<td><%= s.getSection_name() %></td>
-				<td><%= s.getSection_id() %></td>
-				<td><button>update</button></td>
-				<td><button>delete</button></td>
-			</tr>
-				<%
-					}
-				%>
-		</table>
-<!-- Optional JavaScript; choose one of the two! -->
+	
+	//create xhr object
+	var xhr = new XMLHttpRequest();
+	//console.log(xhr);
+	xhr.open('GET',url,true);
 
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	xhr.onload = function () {
+		if (this.status == 200) {
+			var res= this.responseText;
+			document.getElementById("design").classList.add("border");
+			document.getElementById("design").classList.add("border-danger");
+			document.getElementById("design").classList.add("rounded");
+			if(res=="0")
+			   {
+				document.getElementById("response").innerHTML="subject added";
+				}
+			if(res=="1")
+			   {
+				document.getElementById("response").innerHTML="duplicate entry";
+			   }
+			if(res=="2")
+			   {	
+				document.getElementById("response").innerHTML="contact admin, something unexpected occured";
+			   }
+		}
+		else if (this.status == 404) 
+		{
+			document.getElementById("design").classList.add("border");
+			document.getElementById("design").classList.add("border-danger");
+			document.getElementById("design").classList.add("rounded");
+			document.getElementById("response").innerHTML="something went wrong";		
+		} 
+	}
 
-    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    -->
+	xhr.send();
+}
+</script>
   </body>
 </html>

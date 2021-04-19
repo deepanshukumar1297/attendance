@@ -35,7 +35,7 @@
 						  style="background-color: rgb(233, 235, 221);">
 						  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
 						  <li class="breadcrumb-item"><a href="loginAdmin.jsp">Admin Login</a></li>
-						  <li class="breadcrumb-item"><a href="admin.jsp">Admin</a></li>
+						  <li class="breadcrumb-item"><a href="admin.jsp">Choose</a></li>
 						  <li class="breadcrumb-item active">Add-Update-Delete</li>
 					  </ol>
 				  </nav>
@@ -132,9 +132,9 @@
 	}
 	e.preventDefault();
 	//creating url pattern
-	var teacher_name=document.getElementById("subject_name").value;  
-	var teacher_id=document.getElementById("subject_id").value;  
-	var url="AdminSubject?subject_name="+teacher_name+"&subject_id="+teacher_id;
+	var subject_name=document.getElementById("subject_name").value;  
+	var subject_id=document.getElementById("subject_id").value;  
+	var url="AdminSubject?subject_name="+subject_name+"&subject_id="+subject_id;
 	console.log(url);
 	
 	

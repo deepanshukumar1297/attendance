@@ -90,51 +90,13 @@ public class DCoordinator
 	}
 	
 	/**
-	 * checking the password entered by coordinator is right or wrong 
-	 * 
-	 * @param coordiantor_teacherPassword
-	 * @param coordiantor_sectionId
-	 * @return status of password entered by coordinator is right or wrong
-	 */
-	public String passValidation(String coordiantor_teacherPassword , String coordiantor_sectionId)							
-	{
-		getCon();		
-		try
-		{
-			Connection con=DriverManager.getConnection(url, uname, pass);
-			Statement st= con.createStatement();
-			
-			String query1= String.format("select teacher_id from coordinator where section_id=('%s') ",coordiantor_sectionId ); 
-			ResultSet rs=st.executeQuery(query1);
-			System.out.println(query1);
-			rs.next();
-			String teacher_id=rs.getString("teacher_id");
-			
-			String query2= String.format("select teacher_password from teacher where teacher_id=('%s') ",teacher_id );     //here section is the foreign key stored as section id in teacher table
-			rs=st.executeQuery(query2);
-			rs.next();
-			String actual_password=rs.getString("teacher_password");                                 
-			
-			if(coordiantor_teacherPassword.equals(actual_password)) return "correct password";
-			else return "incorrect password";
-		}
-		
-		catch(SQLException e)
-		{
-			//e.printStackTrace();
-			return "exception occcured";
-		}
-	}
-	
-	/**
-	 * if countlogin = 1 -> coordinator is first time user and he should change password
 	 * 
 	 * @param coordiantor_sectionId
-	 * @return -1 or number of times coordinator has logged in
+	 * @return teacher_id of the coordinator
 	 */
-	public String getPasswordVerification(String coordinator_sectionId )
+	public String getId(String coordinator_sectionId )
 	{
-		String password="";
+		String teacher_id="";
 		getCon();		
 		try
 		{
@@ -144,54 +106,24 @@ public class DCoordinator
 			String query1= String.format("select teacher_id from coordinator where section_id=('%s') ",coordinator_sectionId );
 			ResultSet rs=st.executeQuery(query1);
 			rs.next();
-			String teacher_id=rs.getString("teacher_id");
-			
-			String query2= String.format("select teacher_password from teacher where teacher_id=('%s') ",teacher_id );  
-			rs=st.executeQuery(query2);
-			rs.next();
-			password = rs.getString("teacher_password"); 
+			teacher_id=rs.getString("teacher_id");
+ 
 		}
 	
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
-		return password;
+		return teacher_id;
 	}
+	
 	
 	/**
-	 * updating the password of coordinator if coordinator is first time user
 	 * 
-	 * @param password
-	 * @param section_id
-	 * @return status of password changed
+	 * @param coordinator
+	 * @return
 	 */
-	public String updatePassword(String new_password, String coordiantor_sectionId)
-	{
-		getCon();
-		try
-		{
-			Connection con=DriverManager.getConnection(url, uname, pass);
-			Statement st= con.createStatement();
-			ResultSet rs=null;
-			
-			String query1= String.format("select teacher_id from coordinator where section_id=('%s')",coordiantor_sectionId); 	
-			rs= st.executeQuery(query1);
-			rs.next();
-			String teacher_id=rs.getString("teacher_id");
-			
-			String query2= String.format("update teacher set teacher_password=('%s')  where teacher_id=('%s')",new_password,teacher_id);  	
-			st.executeUpdate(query2);
-			
-			return "password changed";
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-			return "exception occcured";
-		}	
-	}
-
+	 
 	public String delete(Coordinator coordinator) {
 		getCon();
 		String query= "delete from coordinator where section_id=?"; 

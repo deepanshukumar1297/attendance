@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DTeacher;
+import pojo.Teacher;
 
 /**
  * Servlet implementation class LoginTeacher
@@ -27,20 +28,25 @@ public class LoginTeacher extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		DTeacher dteacher = new DTeacher();
+		Teacher teacher = new Teacher();
 
 		String teacher_id = request.getParameter("teacher_id");
 		String teacher_password = request.getParameter("password");
-
+		
+		
 		HttpSession session = request.getSession();
-		session.setAttribute("teacher_password", teacher_password);
+		//session.setAttribute("teacher_password", teacher_password);
 		session.setAttribute("teacher_id", teacher_id);
+		
+		teacher.setTeacher_id(teacher_id);
+        teacher.setTeacher_password(teacher_password);
 		
 		if(teacher_password.equals("password") )                   //first time user
 		{
 	        String password=dteacher.getPasswordVerification(teacher_id);
 	        if(password.equals("*"))
 			{
-				RequestDispatcher rd=request.getRequestDispatcher("chngPassTeacher.html");
+				RequestDispatcher rd=request.getRequestDispatcher("changePassword.jsp?teacher_id="+teacher_id);
 				rd.forward(request, response);
 			}
 	        else if(password.equals("password"))
@@ -53,7 +59,7 @@ public class LoginTeacher extends HttpServlet {
 		}
 		else									                                             //regular user
 		{
-			String validation=dteacher.passValidation(teacher_password,teacher_id);
+			String validation=dteacher.passValidation(teacher);
 			if(validation.equals("correct password"))
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("teacher.jsp");

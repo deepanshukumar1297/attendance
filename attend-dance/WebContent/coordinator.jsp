@@ -1,136 +1,159 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+	
 <%@ page import = "java.util.ArrayList" %>
-<%@ page import="dao.DTeacher"%>
-<%@ page import="dao.DSection"%>
-<%@ page import="dao.DSubject"%>
 <%@ page import="dao.DSubjectTeacherSection" %>
 
-<%@ page import="pojo.Section" %>
-<%@ page import="pojo.Teacher" %>
-<%@ page import="pojo.Subject" %>
 <%@ page import="pojo.Student" %>
 <%@ page import="pojo.SubjectTeacherSection" %>
 
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>coordinator</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="css/bootstrap.css">
+
+
+<title>Coordinator</title>
+
 </head>
-<body>
+<body class="row align-content-between" style="background-color: rgb(233, 235, 221); height:100vh; width: 100vw;">
+
 		<% 
-	        String coordiantor_sectionId=(String)session.getAttribute("coordiantor_sectionId");
+			String coordiantor_sectionId=(String)session.getAttribute("coordiantor_sectionId");
 			
 			DSubjectTeacherSection dsubteachsec = new DSubjectTeacherSection();
 			ArrayList<String> coordinatorinfo = dsubteachsec.coordinatorInfo(coordiantor_sectionId);                     //teacher_id,teacher_name
 			ArrayList<SubjectTeacherSection> subteach_list = dsubteachsec.fetchSubjectTeacher(coordiantor_sectionId);  
-			ArrayList<Student> secstudentlist = dsubteachsec.fetchStudent(coordiantor_sectionId);     
-
-			DTeacher dteacher = new DTeacher();
-			ArrayList<Teacher> teacherslist= dteacher.fetch();
+			ArrayList<Student> secstudent_list = dsubteachsec.fetchStudent(coordiantor_sectionId);     
 			
-			DSection dsection = new DSection();
-			ArrayList<Section> sectionslist= dsection.fetch();
-			
-			DSubject dsubject = new DSubject();
-			ArrayList<Subject> subjectslist= dsubject.fetch();
         %>
-    
-    <a href="chngPassCoordinator.html"><button>change password</button></a>    
-    
-    <pre>WELCOME  <%= coordinatorinfo.get(1) %>   ID=<%= coordinatorinfo.get(0) %> </pre> <br>
-	YOU ARE COORDINATOR OF <%= coordiantor_sectionId %>
-	<br><br>
+	<!---------------    header     -------------->
+
+	<div  class="container-fluid bg-info ">
+		<div class="row align-content-around" style="height: 3rem;">
+			<header class="col text-monospace lead font-weight-bold text-center text-light ">
+				ATTENDANCE MANAGEMENT SYSTEM
+			</header>
+		</div>
+	</div>
+
+	<!---------------    navigation     -------------->
+
+	<div class="container-fluid ">
+		<div class="row">
+
+			<div class="col-8 text-monospace ">
+				<nav>
+					<ol class="breadcrumb"
+						style="background-color: rgb(233, 235, 221);">
+						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item"><a href="loginCoordinator.jsp">Coordinator Login</a></li>
+						<li class="breadcrumb-item active">Coordinator</li>
+					</ol>
+				</nav>
+			</div>
+
+			<div class="col-4">
+				<a class="btn btn-primary" href="coordinatorStudent.jsp?section_id=<%= coordiantor_sectionId%>" role="button"><%= coordiantor_sectionId.toUpperCase() %></a>
+				<a class="btn btn-primary" href="changePassword.jsp?teacher_id=<%= coordinatorinfo.get(0) %>" role="button">change password</a>
+				<a class="btn btn-primary" href="assignSubjectTeachers.jsp?section_id=<%= coordiantor_sectionId %>" role="button">assign teachers</a>
+			</div>
+		</div>
+	</div>
+
+    <!---------------    main     -------------->
+	<main id="verification" class="container-fluid ">
+		<div class="row text-center align-content-center " style="height: 6rem;">
+
+			<div class="col-12">
+				<h2 class="text-dark ">
+					welcome  <%= coordinatorinfo.get(1).toUpperCase() %>   (ID=<%= coordinatorinfo.get(0).toUpperCase() %>)
+				</h2>
+			</div>
+
+			<div class="col-12 ">
+				<h3  class="text-muted">
+					you are coordinator of <%= coordiantor_sectionId.toUpperCase() %>
+				</h3>
+			</div>
+
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-7 border border-primary rounded bg-info overflow-auto" style="height: 55vh;">
+
+				<div class="row bg-primary sticky-top">
+					<div class="col text-monospace">
+						<header class="text-center font-weight-bold my-3">
+							assigned teachers and thier subjects in <%= coordiantor_sectionId.toUpperCase() %>
+						</header>
+					</div>
+				</div>
 	
-	<form action="CAssignSubjectTeachers">
-		Assign teacher for the subjects
-		<div>
-			teacher id
-			<select name="teacher_id">
-				<% 
-					for(Teacher t:teacherslist)
-					{
-				%>
-				<option><%= t.getTeacher_id() %></option>
-				<%
-					}
-				%>
-			</select>
-			
+	
+				<div class="row my-3">
+					<div class="col table-responsive">
+						<table
+							class="table  table-sm table-dark table-bordered table-hover">
+	
+							<thead>
+								<tr>
+									<th>SUBJECT ID</th>
+									<th>TEACHER ID</th>
+									
+								</tr>
+							</thead>
+	
+							<tbody>
+								<% 
+									for(SubjectTeacherSection sts:subteach_list)
+									{
+								%>
+							<tr>
+								<td><%= sts.getSubject_id() %></td>
+								<td><%= sts.getTeacher_id() %></td>
+							</tr>
+								<%
+									}
+								%>
+							</tbody>
+	
+						</table>
+					</div>
+				</div>
+
+			</div>
 		</div>
-		
-		<div>
-			<input type="hidden" name="section_id" value="<%= coordiantor_sectionId %>">
+
+	</main>
+
+	
+    <!---------------    footer     -------------->
+	<footer  class="container-fluid bg-info">
+		<div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
+			<div class="col-5 ">
+				<a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+			</div>
+			<div class="col-4">
+				<span>
+					BY: 
+				</span>
+				<span>
+					<a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+					<a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+					<a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+					<a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
+				</span>
+			</div>
 		</div>
-		<br>
-		<div>
-			subject id
-			<select name="subject_id">
-				<% 
-					for(Subject s:subjectslist)
-					{
-				%>
-				<option><%= s.getSubject_id() %></option>
-				<%
-					}
-				%>
-			</select>
-			
-		</div>
-		<br>
-		<div>
-			<input type = "submit" value="ASSIGN" >
-		</div>
-	</form>
-	<br><br><br>
-	LIST OF TEACHERS AND THEIR SUBJECTS
-	<br>
-	<table style="border: solid; border-color: red;">
-			<tr>
-				<th>subject id</th>
-				<th>teacher id</th>
-				<th>update</th>
-				<th>delete</th>
-			</tr>
-				<% 
-					for(SubjectTeacherSection sts:subteach_list)
-					{
-				%>
-			<tr>
-				<td><%= sts.getSubject_id() %></td>
-				<td><%= sts.getTeacher_id() %></td>
-				<td><button>update</button></td>
-				<td><button>delete</button></td>
-				<%
-					}
-				%>
-			</tr>
-		</table>
-		<br><br>
-		LIST OF STUDENTS IN YOUR CLASS
-		<br>
-		<table style="border: solid; border-color: red;">
-			<tr>
-				<th>student id</th>
-				<th>student name</th>
-				<th>update</th>
-				<th>delete</th>
-			</tr>
-				<% 
-					for(Student s:secstudentlist)
-					{
-				%>
-			<tr>
-				<td><%= s.getStudent_id() %></td>
-				<td><%= s.getStudent_name() %></td>
-				<td><button>update</button></td>
-				<td><button>delete</button></td>
-				<%
-					}
-				%>
-			</tr>
-		</table>
-</body>
+	</footer>
+
+	
+	
+  </body>
+
 </html>
