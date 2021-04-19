@@ -1,2 +1,5 @@
 # attendance
-mini project
+
+attendance management system 
+-- optimize attendance process
+-- live attenance
