@@ -25,7 +25,7 @@ public class MarkAttendance extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		PrintWriter out=  response.getWriter();
 		response.setContentType("text/html");

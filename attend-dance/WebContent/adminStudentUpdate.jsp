@@ -107,23 +107,24 @@
 	<!---------------    footer     -------------->
 
 	<footer  class="container-fluid bg-info">
-        <div class="row align-content-around justify-content-center text-monospace font-weight-bold text-dark" style="height: 3rem;">
-            <div class="col-5 ">
-                <a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
-            </div>
-            <div class="col-4">
-                <span>
-                    BY: 
-                </span>
-                <span>
-                    <a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
-                    <a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
-                    <a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
-                    <a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a>
-                </span>
-            </div>
-        </div>
-    </footer>
+      <div class="row align-content-center justify-content-around text-monospace font-weight-bold text-dark" style="height: 3rem;">
+          <div class="col-5">
+              <a href="https://www.medicaps.ac.in"  class="text-reset">MEDICAPS-UNIVERSITY</a>
+          </div>
+          <div class="col-5">
+              <span>
+                  BY: 
+              </span>
+              <span>
+                  <a href="https://www.instagram.com/darshika_sinvhal/" target="_blank" class="text-reset">Darshika</a> |
+                  <a href="https://www.instagram.com/gurneetchabra/" target="_blank" class="text-reset">Gurneet</a> |
+                  <a href="https://www.instagram.com/devramchandani/" target="_blank" class="text-reset">Dev</a> |
+                  <a href="https://www.instagram.com/_deepanshu_15/" target="_blank" class="text-reset">Deepanshu</a> |
+                  <a href="#" target="_blank" class="text-reset">Harhien</a>
+              </span>
+          </div>
+      </div>
+  </footer>
     
 
     <!-----------    script     --------------->
