@@ -50,7 +50,7 @@
 					
 					<div class="row bg-primary">
 						<div class="col text-monospace">
-							<header class="text-center font-weight-bold my-3">ADD NEW SUBJECT</header>
+							<header class="text-center font-weight-bold my-3">ADD NEW SECTION</header>
 						</div>
 					</div>
 	
@@ -152,7 +152,7 @@
 			document.getElementById("design").classList.add("rounded");
 			if(res=="0")
 			   {
-				document.getElementById("response").innerHTML="subject added";
+				document.getElementById("response").innerHTML="section added";
 				}
 			if(res=="1")
 			   {
